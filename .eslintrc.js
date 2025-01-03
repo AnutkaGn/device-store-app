@@ -39,7 +39,7 @@ module.exports = {
       },
     ],
     'no-unused-vars': 'off',
-    quotes: ['error', 'single'],
+    quotes: ['error', 'double'],
   },
   overrides: [
     {
