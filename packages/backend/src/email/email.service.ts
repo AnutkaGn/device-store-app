@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
 import { VerifyEmailDto } from './dto/verify-email.dto';
-import { generateVerificationCode } from '../common/helpers/verification-code.helper';
+import { generateVerificationCode } from '../common/helpers/generate-verification-code.helper';
 import { UserService } from '@/user/user.service';
 
 @Injectable()
