@@ -17,7 +17,7 @@ import {
 } from 'react-hook-form';
 
 import { styles } from './input.styles';
-import { InputError } from '../../input-error';
+import { InputError } from '../input-error';
 
 type InputProps<
 	T extends FieldValues = FieldValues,
