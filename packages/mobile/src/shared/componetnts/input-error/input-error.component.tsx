@@ -1,8 +1,8 @@
-import * as React from 'react';
-import { StyleProp, Text, TextStyle } from 'react-native';
-import { Control, FieldValues, useFormState } from 'react-hook-form';
+import * as React from "react";
+import { StyleProp, Text, TextStyle } from "react-native";
+import { Control, FieldValues, useFormState } from "react-hook-form";
 
-import { styles } from './input-error.styles';
+import { styles } from "./input-error.styles";
 
 type InputErrorProps<T extends FieldValues> = {
 	control: Control<T>;
