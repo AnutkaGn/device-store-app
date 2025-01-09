@@ -1,4 +1,4 @@
-import { Character } from '../../../shared/types';
+import { Character } from "../../../shared/types";
 
 export type CharacterInfroParams = {
 	character: Character;
