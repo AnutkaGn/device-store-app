@@ -10,12 +10,6 @@ type AuthState = {
 	logout: () => void;
 };
 
-const asyncStorageWrapper = {
-	getItem: (key: string) => asyncStorage.getData(key),
-	setItem: (key: string, value: string) => asyncStorage.setData(key, value),
-	removeItem: (key: string) => asyncStorage.removeData(key),
-};
-
 export const useAuthStore = create<AuthState>()(
 	persist(
 		(set, _get) => ({
@@ -35,7 +29,7 @@ export const useAuthStore = create<AuthState>()(
 		}),
 		{
 			name: "auth-storage",
-			storage: createJSONStorage(() => asyncStorageWrapper),
+			storage: createJSONStorage(() => asyncStorage),
 		},
 	),
 );

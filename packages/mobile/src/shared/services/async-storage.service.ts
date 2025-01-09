@@ -1,7 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export class AsyncStorageService {
-	public async getData(key: string): Promise<string | null> {
+	public async getItem(key: string): Promise<string | null> {
 		try {
 			const value = await AsyncStorage.getItem(key);
 			return value;
@@ -11,7 +11,7 @@ export class AsyncStorageService {
 		}
 	}
 
-	public async setData(key: string, value: string): Promise<void> {
+	public async setItem(key: string, value: string): Promise<void> {
 		try {
 			await AsyncStorage.setItem(key, value);
 		} catch (e) {
@@ -19,7 +19,7 @@ export class AsyncStorageService {
 		}
 	}
 
-	public async removeData(key: string): Promise<void> {
+	public async removeItem(key: string): Promise<void> {
 		try {
 			await AsyncStorage.removeItem(key);
 		} catch (e) {
@@ -30,7 +30,7 @@ export class AsyncStorageService {
 	public async setStringifiedData<T>(key: string, data: T): Promise<void> {
 		try {
 			const stringifiedData = JSON.stringify(data);
-			await this.setData(key, stringifiedData);
+			await this.setItem(key, stringifiedData);
 		} catch (e) {
 			this.getErrorMessage(e);
 		}
@@ -38,7 +38,7 @@ export class AsyncStorageService {
 
 	public async getParsedData<T>(key: string): Promise<T | undefined> {
 		try {
-			const data = await this.getData(key);
+			const data = await this.getItem(key);
 			if (data) {
 				const parsedData: T = JSON.parse(data);
 				return parsedData;

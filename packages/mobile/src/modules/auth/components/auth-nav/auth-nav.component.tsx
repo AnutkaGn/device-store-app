@@ -1,14 +1,13 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { styles } from "./auth-nav.styles";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "src/modules/navigation/types";
+import { NAVIGATION_KEYS, RootStackParamList } from "src/modules/navigation/types";
 
 type RedirectProps = {
 	redirectText: string;
 	linkText: string;
-	navigationTarget: any;
+	navigationTarget: NAVIGATION_KEYS.LOGIN | NAVIGATION_KEYS.SIGNUP;
 };
 
 export const AuthNav: React.FC<RedirectProps> = ({
@@ -16,10 +15,7 @@ export const AuthNav: React.FC<RedirectProps> = ({
 	linkText,
 	navigationTarget,
 }) => {
-	const navigation =
-		useNavigation<
-			StackNavigationProp<RootStackParamList, typeof navigationTarget>
-		>();
+	const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
 	return (
 		<View style={styles.container_link}>

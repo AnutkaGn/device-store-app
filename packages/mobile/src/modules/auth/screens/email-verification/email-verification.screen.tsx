@@ -8,11 +8,10 @@ import { Layout, VerificationCodeForm } from "src/shared/componetnts";
 import { useEmailVerification } from "../../hooks";
 
 export const EmailVerificationScreen = () => {
-	const route =
+	const { params: { email } } =
 		useRoute<
 			RouteProp<RootStackParamList, NAVIGATION_KEYS.EMEIL_VERIFICATION>
 		>();
-	const { email } = route.params;
 
 	const { verifyEmail, isPending } = useEmailVerification();
 

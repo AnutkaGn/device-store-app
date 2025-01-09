@@ -36,7 +36,7 @@ export const useEmailVerification = () => {
 		},
 		onError: (error) => {
 			const errorMessage = getErrorMessage(error.response?.data?.message);
-			showToast(ToastType.ERROR, Messages.VERIFICATION_FAILED);
+			showToast(ToastType.ERROR, Messages.VERIFICATION_FAILED, errorMessage);
 		},
 	});
 

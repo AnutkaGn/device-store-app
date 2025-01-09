@@ -47,6 +47,6 @@ export const styles = StyleSheet.create({
 	iconContainer: {
 		position: "absolute",
 		right: 15,
-		top: 42,
+		top: 45,
 	},
 });

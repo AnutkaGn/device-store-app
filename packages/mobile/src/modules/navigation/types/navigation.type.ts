@@ -23,6 +23,5 @@ export type RootStackParamList = {
 	[NAVIGATION_KEYS.SETTINGS_STACK]: undefined;
 	[NAVIGATION_KEYS.ORDERS_STACK]: undefined;
 	[NAVIGATION_KEYS.PRODUCTS_STACK]: undefined;
-
 	[NAVIGATION_KEYS.BOTTOM_TAB]: undefined;
 };
