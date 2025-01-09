@@ -24,18 +24,17 @@ export class AuthService {
 	async register(dto: RegisterDto): Promise<RegisterResponse> {
 		const { email, password, fullName, phoneNumber, shippingAddress } = dto;
 
-		const existingUser = await this.userService.findByEmail(email);
+		const isEmailExist = Boolean(await this.userService.findByEmail(email));
 
-		const existPhoneNumber = await this.userService.findByPhoneNumber(phoneNumber)
+		const isPhoneNumberExist = Boolean(await this.userService.findByPhoneNumber(phoneNumber));
 
-		if (existingUser) {
+		if (isEmailExist) {
 			throw new BadRequestException("User with this email already exists");
 		}
-		if (existPhoneNumber) {
+		if (isPhoneNumberExist) {
 			throw new BadRequestException("User with this phone number already exists");
 		}
 
-	
 		const hashedPassword = await bcrypt.hash(password, 10);
 
 		const verificationCode =
