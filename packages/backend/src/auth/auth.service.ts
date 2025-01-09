@@ -4,6 +4,7 @@ import {
 	UnauthorizedException,
 	NotFoundException,
 	HttpStatus,
+	ForbiddenException,
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { UserService } from "@/user/user.service";
@@ -63,14 +64,16 @@ export class AuthService {
 			throw new NotFoundException("User not found");
 		}
 
-		if (!user.isVerified) {
-			throw new UnauthorizedException("Email not verified");
-		}
-
 		const isPasswordValid = await bcrypt.compare(password, user.password);
 
 		if (!isPasswordValid) {
 			throw new UnauthorizedException("Invalid credentials");
+		}
+
+		if (!user.isVerified) {
+			const verificationCode = await this.emailService.sendVerificationCode(email);
+			await this.userService.update(user.id, { verificationCode });
+			throw new ForbiddenException("Email not verified");
 		}
 
 		const accessToken = this.generateToken(user.id, user.email, user.role);
