@@ -14,7 +14,8 @@ interface VerificationCodeFormProps {
 	title: string;
 	subtitle: string;
 	codeLength?: number;
-	onSubmit: (code: string) => void;
+	onSubmit: (verificationCode: number) => void;
+	isDisabledButtom: boolean;
 }
 
 export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
@@ -22,6 +23,7 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
 	subtitle,
 	codeLength = 4,
 	onSubmit,
+	isDisabledButtom,
 }) => {
 	const [code, setCode] = useState("");
 	const inputRef = useRef<TextInput>(null);
@@ -39,7 +41,7 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
 	};
 
 	const handleVerify = () => {
-		onSubmit(code);
+		onSubmit(Number(code));
 	};
 
 	return (
@@ -81,6 +83,7 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
 				onPress={handleVerify}
 				title="Submit"
 				buttonStyle={styles.button}
+				disabled={isDisabledButtom}
 			/>
 		</KeyboardAvoidingView>
 	);

@@ -1,19 +1,15 @@
 import React from "react";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { useNavigation } from "@react-navigation/native";
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import {
 	NAVIGATION_KEYS,
 	RootStackParamList,
 } from "src/modules/navigation/types";
 import { SuccessMessage } from "src/shared/componetnts";
 
-export const RegisteredSuccessfully = () => {
+export const RegisteredSuccessfullyScreen = () => {
 	const navigation =
-		useNavigation<
-			StackNavigationProp<RootStackParamList, NAVIGATION_KEYS.LOGIN>
-		>();
+		useNavigation<NavigationProp<RootStackParamList, NAVIGATION_KEYS.LOGIN>>();
 	const handleButtonPress = () => {
-		console.log("Navigate to dashboard");
 		navigation.navigate(NAVIGATION_KEYS.LOGIN);
 	};
 

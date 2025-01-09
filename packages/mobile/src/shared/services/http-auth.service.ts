@@ -1,6 +1,6 @@
-import type { HttpService } from './http.service';
+import type { HttpService } from "./http.service";
 
-import type { IHttpConfig, IMap } from './types';
+import type { IHttpConfig, IMap } from "./types";
 
 export class EnhancedWithAuthHttpService {
 	constructor(private readonly httpService: HttpService) {
@@ -12,10 +12,7 @@ export class EnhancedWithAuthHttpService {
 	}
 
 	public async get<T>(url: string, config: IHttpConfig = {}): Promise<T> {
-		return this.httpService.get<T>(
-			url,
-			await this.attachAuthHeader(config),
-		);
+		return this.httpService.get<T>(url, await this.attachAuthHeader(config));
 	}
 
 	public async post<T, TD>(
@@ -55,10 +52,7 @@ export class EnhancedWithAuthHttpService {
 	}
 
 	public async delete<T>(url: string, config: IHttpConfig = {}): Promise<T> {
-		return this.httpService.delete<T>(
-			url,
-			await this.attachAuthHeader(config),
-		);
+		return this.httpService.delete<T>(url, await this.attachAuthHeader(config));
 	}
 
 	private async attachAuthHeader(config: IHttpConfig): Promise<IHttpConfig> {

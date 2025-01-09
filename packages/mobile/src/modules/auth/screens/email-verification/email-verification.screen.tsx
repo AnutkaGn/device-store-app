@@ -1,30 +1,23 @@
 import React from "react";
-import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { RouteProp, useRoute } from "@react-navigation/native";
 import {
 	NAVIGATION_KEYS,
 	RootStackParamList,
 } from "src/modules/navigation/types";
 import { Layout, VerificationCodeForm } from "src/shared/componetnts";
+import { useEmailVerification } from "../../hooks";
 
 export const EmailVerificationScreen = () => {
-	const navigation =
-		useNavigation<
-			StackNavigationProp<
-				RootStackParamList,
-				NAVIGATION_KEYS.EMEIL_VERIFICATION
-			>
-		>();
 	const route =
 		useRoute<
 			RouteProp<RootStackParamList, NAVIGATION_KEYS.EMEIL_VERIFICATION>
 		>();
-
 	const { email } = route.params;
 
-	const handleVerify = (code: string) => {
-		console.log("Verification Code:", code);
-		navigation.navigate(NAVIGATION_KEYS.REGISTERED_SUCCESSFULLY);
+	const { verifyEmail, isPending } = useEmailVerification();
+
+	const handleVerify = (verificationCode: number) => {
+		verifyEmail({ email, verificationCode });
 	};
 
 	return (
@@ -33,6 +26,7 @@ export const EmailVerificationScreen = () => {
 				title="Email Verification"
 				subtitle="Please type the code from the email"
 				onSubmit={handleVerify}
+				isDisabledButtom={isPending}
 			/>
 		</Layout>
 	);

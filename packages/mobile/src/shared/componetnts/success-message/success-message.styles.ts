@@ -9,18 +9,12 @@ export const styles = StyleSheet.create({
 		backgroundColor: COLORS.background,
 		padding: 20,
 	},
-	image: {
-		width: 100,
-		height: 100,
-		marginBottom: 20,
-		backgroundColor: COLORS.success,
-	},
 	message: {
 		fontFamily: FONTS.POPPINS_REGULAR,
 		fontSize: 16,
 		color: COLORS.text_primary,
 		textAlign: "center",
-		marginBottom: 40,
+		marginBlockStart: 20,
 	},
 	button: {
 		position: "absolute",

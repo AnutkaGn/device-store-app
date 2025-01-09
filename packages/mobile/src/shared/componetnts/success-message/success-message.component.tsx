@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Image } from "react-native";
 import { Button } from "../button";
 import { styles } from "./success-message.styles";
+import { CheckCircleIcon } from "assets/icons/checkmark-circle";
 
 type SuccessMessageProps = {
 	message: string;
@@ -16,7 +17,7 @@ export const SuccessMessage: React.FC<SuccessMessageProps> = ({
 }) => {
 	return (
 		<View style={styles.container}>
-			<View style={styles.image} />
+			<CheckCircleIcon />
 			<Text style={styles.message}>{message}</Text>
 			<Button
 				title={buttonText}

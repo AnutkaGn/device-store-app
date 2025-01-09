@@ -1,19 +1,17 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export class AsyncStorageService {
-	public async getData(key: string) {
+	public async getData(key: string): Promise<string | null> {
 		try {
 			const value = await AsyncStorage.getItem(key);
-
-			if (value !== null) {
-				return value;
-			}
+			return value;
 		} catch (e) {
 			this.getErrorMessage(e);
+			return null;
 		}
 	}
 
-	public async setData(key: string, value: string) {
+	public async setData(key: string, value: string): Promise<void> {
 		try {
 			await AsyncStorage.setItem(key, value);
 		} catch (e) {
@@ -21,7 +19,7 @@ export class AsyncStorageService {
 		}
 	}
 
-	public async removeData(key: string) {
+	public async removeData(key: string): Promise<void> {
 		try {
 			await AsyncStorage.removeItem(key);
 		} catch (e) {
