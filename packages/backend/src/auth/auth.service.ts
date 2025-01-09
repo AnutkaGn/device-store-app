@@ -3,6 +3,7 @@ import {
 	BadRequestException,
 	UnauthorizedException,
 	NotFoundException,
+	HttpStatus,
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { UserService } from "@/user/user.service";
@@ -10,6 +11,7 @@ import { EmailService } from "@/email/email.service";
 import * as bcrypt from "bcrypt";
 import { RegisterDto } from "./dto/register.dto";
 import { LoginDto } from "./dto/login.dto";
+import { LoginResponse, RegisterResponse } from "./auth.type";
 
 @Injectable()
 export class AuthService {
@@ -19,21 +21,27 @@ export class AuthService {
 		private readonly jwtService: JwtService,
 	) {}
 
-	async register(dto: RegisterDto): Promise<{ accessToken: string }> {
+	async register(dto: RegisterDto): Promise<RegisterResponse> {
 		const { email, password, fullName, phoneNumber, shippingAddress } = dto;
 
 		const existingUser = await this.userService.findByEmail(email);
 
+		const existPhoneNumber = await this.userService.findByPhoneNumber(phoneNumber)
+
 		if (existingUser) {
 			throw new BadRequestException("User with this email already exists");
 		}
+		if (existPhoneNumber) {
+			throw new BadRequestException("User with this phone number already exists");
+		}
 
+	
 		const hashedPassword = await bcrypt.hash(password, 10);
 
 		const verificationCode =
 			await this.emailService.sendVerificationCode(email);
 
-		const newUser = await this.userService.create({
+		await this.userService.create({
 			email,
 			fullName,
 			phoneNumber,
@@ -42,16 +50,13 @@ export class AuthService {
 			verificationCode,
 		});
 
-		const accessToken = this.generateToken(
-			newUser.id,
-			newUser.email,
-			newUser.role,
-		);
-
-		return { accessToken };
+		return {
+			message: "User registered successfully",
+			statusCode: HttpStatus.CREATED,
+		};
 	}
 
-	async login(dto: LoginDto): Promise<{ accessToken: string }> {
+	async login(dto: LoginDto): Promise<LoginResponse> {
 		const { email, password } = dto;
 
 		const user = await this.userService.findByEmail(email);
@@ -71,7 +76,11 @@ export class AuthService {
 
 		const accessToken = this.generateToken(user.id, user.email, user.role);
 
-		return { accessToken };
+		return {
+			accessToken,
+			message: "User login successfully",
+			statusCode: HttpStatus.OK,
+		 };
 	}
 
 	private generateToken(userId: string, email: string, role: string): string {

@@ -20,4 +20,9 @@ export class UserService {
 		const user = await this.prisma.user.findUnique({ where: { email } });
 		return user;
 	}
+
+	async findByPhoneNumber(phoneNumber: string): Promise<User | null> {
+		const user = await this.prisma.user.findUnique({ where: { phoneNumber } });
+		return user;
+	}
 }
