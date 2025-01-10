@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		backgroundColor: COLORS.background,
-		padding: 20,
+		paddingHorizontal: 20,
 	},
 	message: {
 		fontFamily: FONTS.POPPINS_REGULAR,

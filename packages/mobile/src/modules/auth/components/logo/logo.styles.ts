@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
 		textAlign: "center",
 	},
 	image: {
-		marginBlockStart: 110,
+		marginBlockStart: 85,
 		marginBottom: 30,
 		alignSelf: "center",
 		width: 50,
