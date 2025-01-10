@@ -48,7 +48,6 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
 		<KeyboardAwareScrollView
 			style={styles.container}
 			contentContainerStyle={{ flexGrow: 1 }}
-			enableOnAndroid={true}
 			extraScrollHeight={20}
 		>
 			<Text style={styles.title}>{title}</Text>
