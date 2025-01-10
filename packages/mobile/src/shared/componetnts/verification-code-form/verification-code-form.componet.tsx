@@ -3,10 +3,10 @@ import {
 	View,
 	Text,
 	TextInput,
-	KeyboardAvoidingView,
 	Platform,
 	TouchableWithoutFeedback,
 } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Button } from "../button";
 import { styles } from "./verification-code-form.styles";
 
@@ -45,9 +45,11 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
 	};
 
 	return (
-		<KeyboardAvoidingView
+		<KeyboardAwareScrollView
 			style={styles.container}
-			behavior={Platform.OS === "ios" ? "padding" : undefined}
+			contentContainerStyle={{ flexGrow: 1 }}
+			enableOnAndroid={true}
+			extraScrollHeight={20}
 		>
 			<Text style={styles.title}>{title}</Text>
 			<Text style={styles.subtitle}>{subtitle}</Text>
@@ -85,6 +87,6 @@ export const VerificationCodeForm: React.FC<VerificationCodeFormProps> = ({
 				buttonStyle={styles.button}
 				disabled={isDisabledButtom}
 			/>
-		</KeyboardAvoidingView>
+		</KeyboardAwareScrollView>
 	);
 };

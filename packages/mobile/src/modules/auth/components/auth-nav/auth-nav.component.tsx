@@ -2,7 +2,10 @@ import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { styles } from "./auth-nav.styles";
-import { NAVIGATION_KEYS, RootStackParamList } from "src/modules/navigation/types";
+import {
+	NAVIGATION_KEYS,
+	RootStackParamList,
+} from "src/modules/navigation/types";
 
 type RedirectProps = {
 	redirectText: string;

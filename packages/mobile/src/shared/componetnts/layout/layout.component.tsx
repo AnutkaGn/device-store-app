@@ -13,6 +13,6 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 			<ScrollView contentContainerStyle={styles.container}>
 				<View style={styles.content}>{children}</View>
 			</ScrollView>
-		</SafeAreaView>	
+		</SafeAreaView>
 	);
 };

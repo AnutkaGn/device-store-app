@@ -8,7 +8,9 @@ import { Layout, VerificationCodeForm } from "src/shared/componetnts";
 import { useEmailVerification } from "../../hooks";
 
 export const EmailVerificationScreen = () => {
-	const { params: { email } } =
+	const {
+		params: { email },
+	} =
 		useRoute<
 			RouteProp<RootStackParamList, NAVIGATION_KEYS.EMEIL_VERIFICATION>
 		>();
