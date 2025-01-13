@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { HttpStatus, Injectable } from "@nestjs/common";
 import { Prisma, Product } from "@prisma/client";
 import { PrismaService } from "@/prisma/prisma.service";
 import { ResponseDto } from "@/common/dto/response.dto";
@@ -20,7 +20,7 @@ export class ProductService {
 			data: createProductDto,
 		});
 		return {
-			statusCode: 201,
+			statusCode: HttpStatus.CREATED,
 			message: Messages.PRODUCT_CREATED,
 			data: product,
 		};
@@ -52,13 +52,13 @@ export class ProductService {
 
 		if (products.length === 0) {
 			return {
-				statusCode: 204,
+				statusCode: HttpStatus.NOT_FOUND,
 				message: Messages.NO_PRODUCTS_FOUND,
 			};
 		}
 
 		return {
-			statusCode: 200,
+			statusCode: HttpStatus.OK,
 			message: Messages.PRODUCTS_RETRIEVED,
 			data: { data: products, total },
 		};
@@ -67,7 +67,7 @@ export class ProductService {
 	async findOne(id: string): Promise<ResponseDto<Product>> {
 		const product = await this.prisma.product.findUnique({ where: { id } });
 		return {
-			statusCode: 200,
+			statusCode: HttpStatus.OK,
 			message: Messages.PRODUCTS_RETRIEVED,
 			data: product,
 		};
@@ -82,7 +82,7 @@ export class ProductService {
 			data: updateProductDto,
 		});
 		return {
-			statusCode: 200,
+			statusCode: HttpStatus.OK,
 			message: Messages.PRODUCT_UPDATED,
 			data: product,
 		};
@@ -91,7 +91,7 @@ export class ProductService {
 	async remove(id: string): Promise<ResponseDto<void>> {
 		await this.prisma.product.delete({ where: { id } });
 		return {
-			statusCode: 200,
+			statusCode: HttpStatus.OK,
 			message: Messages.PRODUCT_DELETED,
 		};
 	}
