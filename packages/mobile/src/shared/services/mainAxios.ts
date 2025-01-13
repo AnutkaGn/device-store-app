@@ -1,5 +1,5 @@
-import type { AxiosResponse } from 'axios';
-import axios from 'axios';
+import type { AxiosResponse } from "axios";
+import axios from "axios";
 
 export const mainAxios = axios.create({
 	withCredentials: true,

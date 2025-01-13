@@ -1,8 +1,9 @@
-import { Injectable } from "@nestjs/common";
+import { HttpStatus, Injectable } from "@nestjs/common";
 import { PrismaService } from "@/prisma/prisma.service";
 import { User } from "@prisma/client";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { CreateUserResponseDto } from "./dto/create-user-response.dto";
+import { UpdateResponse } from "./user.type";
 
 @Injectable()
 export class UserService {
@@ -20,4 +21,21 @@ export class UserService {
 		const user = await this.prisma.user.findUnique({ where: { email } });
 		return user;
 	}
+
+	async findByPhoneNumber(phoneNumber: string): Promise<User | null> {
+		const user = await this.prisma.user.findUnique({ where: { phoneNumber } });
+		return user;
+	}
+
+	async update(userId: string, data: Partial<User>): Promise<UpdateResponse> {
+		await this.prisma.user.update({
+			where: { id: userId },
+			data,
+		});
+		return{
+			message: "User updated successfully",
+			statusCode: HttpStatus.OK,
+		};
+	}
+	
 }
