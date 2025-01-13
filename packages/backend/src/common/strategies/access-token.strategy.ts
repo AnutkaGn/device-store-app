@@ -2,6 +2,7 @@ import { NotFoundException } from "@nestjs/common";
 import { PassportStrategy } from "@nestjs/passport";
 import { PrismaClient, User } from "@prisma/client";
 import { ExtractJwt, Strategy } from "passport-jwt";
+import { Messages } from "../constants/messages.constant";
 
 export class AtStrategy extends PassportStrategy(Strategy, "access") {
 	constructor(private readonly prisma: PrismaClient) {
@@ -18,7 +19,7 @@ export class AtStrategy extends PassportStrategy(Strategy, "access") {
 		});
 
 		if (!user) {
-			throw new NotFoundException("User not found");
+			throw new NotFoundException(Messages.USER_NOT_FOUND);
 		}
 
 		return user;
