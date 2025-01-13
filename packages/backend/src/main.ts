@@ -1,6 +1,7 @@
 import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { AllExceptionsFilter } from "./common/filters/exception.filter";
+import { AtGuard } from "./common/guards/access-token.guard";
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
