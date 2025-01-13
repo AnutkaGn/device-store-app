@@ -4,10 +4,12 @@ import {
 	Injectable,
 	BadRequestException,
 	NotFoundException,
+	HttpStatus,
 } from "@nestjs/common";
 import { VerifyEmailDto } from "./dto/verify-email.dto";
 import { generateVerificationCode } from "../common/helpers/generate-verification-code.helper";
 import { UserService } from "@/user/user.service";
+import { VerifyEmailResponse } from "@/auth/auth.type";
 
 @Injectable()
 export class EmailService {
@@ -51,7 +53,7 @@ export class EmailService {
 		}
 	}
 
-	async verifyCode(dto: VerifyEmailDto) {
+	async verifyCode(dto: VerifyEmailDto): Promise<VerifyEmailResponse> {
 		const user = await this.userService.findByEmail(dto.email);
 		if (!user) {
 			throw new NotFoundException("User not found");
@@ -72,5 +74,9 @@ export class EmailService {
 				verificationCode: null,
 			},
 		});
+		return {
+			message: "User registered successfully",
+			statusCode: HttpStatus.CREATED,
+		};
 	}
 }

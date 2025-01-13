@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import {
 	StyleProp,
 	Text,
@@ -6,7 +6,8 @@ import {
 	TextStyle,
 	View,
 	ViewStyle,
-} from 'react-native';
+	TouchableOpacity,
+} from "react-native";
 import {
 	Control,
 	FieldPath,
@@ -14,10 +15,14 @@ import {
 	FieldValues,
 	RegisterOptions,
 	useController,
-} from 'react-hook-form';
+} from "react-hook-form";
 
-import { styles } from './input.styles';
-import { InputError } from '../../input-error';
+import { styles } from "./input.styles";
+import { InputError } from "../input-error";
+import StrikedEye from "assets/images/icons/striked-eye.svg";
+
+import { EyeIcon } from "assets/icons/eye";
+import { StrikedEyeIcon } from "assets/icons/striked-eye";
 
 type InputProps<
 	T extends FieldValues = FieldValues,
@@ -29,12 +34,13 @@ type InputProps<
 	rules?:
 		| Omit<
 				RegisterOptions<T, N>,
-				'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
+				"valueAsNumber" | "valueAsDate" | "setValueAs" | "disabled"
 		  >
 		| undefined;
 	label?: string;
 	extraInputContainerStyles?: StyleProp<ViewStyle>;
 	extraErrorStyles?: StyleProp<TextStyle>;
+	secureTextEntry?: boolean;
 };
 
 export function Input<
@@ -48,9 +54,10 @@ export function Input<
 	label,
 	extraInputContainerStyles,
 	extraErrorStyles = {},
+	secureTextEntry = false,
 }: InputProps<T, N>) {
 	const [isFocused, setIsFocused] = React.useState(false);
-
+	const [showPassword, setShowPassword] = React.useState(!secureTextEntry);
 	const inputRef = React.createRef<TextInput>();
 
 	const {
@@ -76,6 +83,9 @@ export function Input<
 		setIsFocused(false);
 	};
 
+	const togglePasswordVisibility = () => {
+		setShowPassword(!showPassword);
+	};
 	return (
 		<View style={[styles.container, extraInputContainerStyles]}>
 			{label && <Text style={styles.label}>{label}</Text>}
@@ -92,8 +102,16 @@ export function Input<
 				]}
 				autoCapitalize="none"
 				ref={inputRef}
+				secureTextEntry={!showPassword}
 			/>
-
+			{secureTextEntry && (
+				<TouchableOpacity
+					style={styles.iconContainer}
+					onPress={togglePasswordVisibility}
+				>
+					{showPassword ? <EyeIcon /> : <StrikedEyeIcon />}
+				</TouchableOpacity>
+			)}
 			<InputError<T>
 				control={control}
 				field={name}

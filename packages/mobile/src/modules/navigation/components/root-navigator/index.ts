@@ -1,1 +1,1 @@
-export * from './root-navigator.component';
+export * from "./root-navigator.component";

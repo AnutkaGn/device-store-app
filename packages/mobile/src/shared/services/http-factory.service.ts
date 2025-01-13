@@ -1,8 +1,8 @@
-import { EnhancedWithAuthHttpService } from './http-auth.service';
+import { EnhancedWithAuthHttpService } from "./http-auth.service";
 
-import { HttpService } from './http.service';
+import { HttpService } from "./http.service";
 
-import { mainAxios } from './mainAxios';
+import { mainAxios } from "./mainAxios";
 
 export class HttpFactoryService {
 	public createHttpService(): HttpService {
