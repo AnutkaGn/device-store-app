@@ -1,15 +1,15 @@
 export interface RegisterResponse {
-    message: string;
-    statusCode: number;
+	message: string;
+	statusCode: number;
 }
-  
+
 export interface LoginResponse {
-    accessToken: string;
+	accessToken: string;
 	message: string;
 	statusCode: number;
 }
 
 export interface VerifyEmailResponse {
-    message: string;
-    statusCode: number; 
+	message: string;
+	statusCode: number;
 }

@@ -13,6 +13,7 @@ import * as bcrypt from "bcrypt";
 import { RegisterDto } from "./dto/register.dto";
 import { LoginDto } from "./dto/login.dto";
 import { LoginResponse, RegisterResponse } from "./auth.type";
+import { Messages } from "@/common/constants/messages.constant";
 
 @Injectable()
 export class AuthService {
@@ -27,13 +28,15 @@ export class AuthService {
 
 		const isEmailExist = Boolean(await this.userService.findByEmail(email));
 
-		const isPhoneNumberExist = Boolean(await this.userService.findByPhoneNumber(phoneNumber));
+		const isPhoneNumberExist = Boolean(
+			await this.userService.findByPhoneNumber(phoneNumber),
+		);
 
 		if (isEmailExist) {
-			throw new BadRequestException("User with this email already exists");
+			throw new BadRequestException(Messages.USER_ALREADY_EXISTS);
 		}
 		if (isPhoneNumberExist) {
-			throw new BadRequestException("User with this phone number already exists");
+			throw new BadRequestException(Messages.PHONE_NUMBER_ALREADY_EXISTS);
 		}
 
 		const hashedPassword = await bcrypt.hash(password, 10);
@@ -51,7 +54,7 @@ export class AuthService {
 		});
 
 		return {
-			message: "User registered successfully",
+			message: Messages.USER_REGISTERED_SUCCESSFULLY,
 			statusCode: HttpStatus.CREATED,
 		};
 	}
@@ -61,34 +64,35 @@ export class AuthService {
 
 		const user = await this.userService.findByEmail(email);
 		if (!user) {
-			throw new NotFoundException("User not found");
+			throw new NotFoundException(Messages.USER_NOT_FOUND);
 		}
 
 		const isPasswordValid = await bcrypt.compare(password, user.password);
 
 		if (!isPasswordValid) {
-			throw new UnauthorizedException("Invalid credentials");
+			throw new UnauthorizedException(Messages.INVALID_CREDENTIALS);
 		}
 
 		if (!user.isVerified) {
-			const verificationCode = await this.emailService.sendVerificationCode(email);
+			const verificationCode =
+				await this.emailService.sendVerificationCode(email);
 			await this.userService.update(user.id, { verificationCode });
-			throw new ForbiddenException("Email not verified");
+			throw new ForbiddenException(Messages.EMAIL_NOT_VERIFIED);
 		}
 
 		const accessToken = this.generateToken(user.id, user.email, user.role);
 
 		return {
 			accessToken,
-			message: "User login successfully",
+			message: Messages.USER_LOGIN_SUCCESSFULLY,
 			statusCode: HttpStatus.OK,
-		 };
+		};
 	}
 
 	private generateToken(userId: string, email: string, role: string): string {
 		const payload = { sub: userId, email, role };
 		const accessToken = this.jwtService.sign(payload, {
-			expiresIn: '24h',
+			expiresIn: "24h",
 		});
 		return accessToken;
 	}
