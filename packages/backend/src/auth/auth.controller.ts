@@ -4,7 +4,12 @@ import { RegisterDto } from "./dto/register.dto";
 import { LoginDto } from "./dto/login.dto";
 import { EmailService } from "@/email/email.service";
 import { VerifyEmailDto } from "@/email/dto/verify-email.dto";
-import { LoginResponse, RegisterResponse, VerifyEmailResponse } from "./auth.type";
+import {
+	LoginResponse,
+	RegisterResponse,
+	VerifyEmailResponse,
+} from "./auth.type";
+import { Public } from "@/common/decorators/public.decorator";
 
 @Controller("auth")
 export class AuthController {
@@ -13,18 +18,21 @@ export class AuthController {
 		private readonly emailService: EmailService,
 	) {}
 
+	@Public()
 	@Post("register")
 	@HttpCode(HttpStatus.CREATED)
 	async register(@Body() dto: RegisterDto): Promise<RegisterResponse> {
 		return await this.authService.register(dto);
 	}
 
+	@Public()
 	@Post("login")
 	@HttpCode(HttpStatus.OK)
 	async login(@Body() dto: LoginDto): Promise<LoginResponse> {
 		return this.authService.login(dto);
 	}
 
+	@Public()
 	@Post("verify")
 	@HttpCode(HttpStatus.OK)
 	async verifyEmail(@Body() dto: VerifyEmailDto): Promise<VerifyEmailResponse> {

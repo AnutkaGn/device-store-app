@@ -5,12 +5,12 @@ import { EmailService } from "@/email/email.service";
 import { UserService } from "@/user/user.service";
 import { AuthService } from "./auth.service";
 import { AuthController } from "./auth.controller";
-import { AtGuard } from "./guards/access-token.guard";
-import { AtStrategy } from "./strategies/access-token.strategy";
+import { AtStrategy } from "../common/strategies/access-token.strategy";
+import { UserModule } from "@/user/user.module";
 
 @Module({
 	controllers: [AuthController],
-	providers: [AuthService, AtStrategy, AtGuard, EmailService, UserService],
+	providers: [AuthService, AtStrategy, EmailService, UserService],
 	imports: [
 		ConfigModule,
 		JwtModule.registerAsync({

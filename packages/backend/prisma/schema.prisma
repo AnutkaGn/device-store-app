@@ -25,3 +25,14 @@ enum UserRole {
   ADMIN
   USER
 }
+
+model Product {
+  id          String    @id @default(uuid()) @db.Uuid
+  name        String
+  description String
+  stock       Int
+  price       Float
+  category    String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
