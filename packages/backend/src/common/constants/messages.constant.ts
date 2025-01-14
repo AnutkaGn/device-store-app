@@ -25,7 +25,7 @@ export const Messages = {
 
 	ID_PARAMETER_REQUIRED: "Parameter 'id' is required but was not provided.",
 	INVALID_MODEL: (model: string) => `odel "${model}" is not valid.`,
-	RESOURCE_NOT_FOUND: (model: string, id: string) =>
+	RESOURCE_NOT_FOUND: (model: unknown, id: string) =>
 		`Resource with id '${id}' in model '${model}' not found.`,
 	ERROR_FETCHING_RESOURCE: (id: string) =>
 		`Error fetching resource with id '${id}'.`,
