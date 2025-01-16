@@ -10,22 +10,8 @@ import {
 import { SettingsIcon } from "assets/icons/settings";
 import { ProductsIcon } from "assets/icons/products";
 import { OrdersIcon } from "assets/icons/orders";
-import { View, Text, StyleSheet } from "react-native";
 
 const Tab = createBottomTabNavigator();
-
-const styles = StyleSheet.create({
-	tabIconContainer: {
-		alignItems: "center",
-	},
-	tabIcon: {
-		marginBottom: 4, // Відступ між іконкою та текстом
-	},
-	tabLabel: {
-		fontSize: 12,
-		color: COLORS.text_primary,
-	},
-});
 
 export const BottomTab = () => {
 	return (
