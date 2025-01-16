@@ -4,7 +4,7 @@ import {
 	Text,
 	ViewStyle,
 	TextStyle,
-	StyleSheet,
+	View,
 } from "react-native";
 import { styles } from "./button.styles";
 
@@ -24,12 +24,14 @@ export const Button = ({
 	disabled = false,
 }: ButtonProps) => {
 	return (
-		<TouchableOpacity
-			onPress={!disabled ? onPress : undefined}
-			style={[styles.button, buttonStyle, disabled && styles.disabledButton]}
-			activeOpacity={disabled ? 1 : 0.7}
-		>
-			<Text style={[styles.buttonText, textStyle]}>{title}</Text>
-		</TouchableOpacity>
+		<View style={styles.sticky_container}>
+			<TouchableOpacity
+				onPress={!disabled ? onPress : undefined}
+				style={[styles.button, buttonStyle, disabled && styles.disabled_button]}
+				activeOpacity={disabled ? 1 : 0.7}
+			>
+				<Text style={[styles.button_text, textStyle]}>{title}</Text>
+			</TouchableOpacity>
+		</View>
 	);
 };

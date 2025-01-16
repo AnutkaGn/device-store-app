@@ -10,13 +10,18 @@ export const styles = StyleSheet.create({
 		borderRadius: 10,
 		alignItems: "center",
 		justifyContent: "center",
+		marginTop: 20,
 	},
-	buttonText: {
+	button_text: {
 		color: COLORS.white,
 		fontSize: 16,
 		fontFamily: FONTS.POPPINS_BOLD,
 	},
-	disabledButton: {
+	disabled_button: {
 		backgroundColor: COLORS.background_inactive,
+	},
+	sticky_container: {
+		flex: 1,
+		justifyContent: "flex-end",
 	},
 });
