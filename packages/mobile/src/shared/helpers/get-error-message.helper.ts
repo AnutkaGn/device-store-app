@@ -1,7 +1,6 @@
 export const getErrorMessage = (
 	error?: string[] | string | { message: string; [key: string]: unknown },
 ): string => {
-	console.log(error);
 	if (typeof error === "string") {
 		return error;
 	}

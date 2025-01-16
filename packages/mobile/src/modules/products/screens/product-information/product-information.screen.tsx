@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { Header } from "src/shared/componetnts/header";
 import { Button, Layout, Loader } from "src/shared/componetnts";
-import { RouteProp, useRoute } from "@react-navigation/native";
+import {
+	NavigationProp,
+	RouteProp,
+	useNavigation,
+	useRoute,
+} from "@react-navigation/native";
 import {
 	NAVIGATION_KEYS,
 	RootStackParamList,
@@ -14,6 +19,7 @@ import { showToast, ToastType } from "src/shared/helpers";
 import { Messages } from "src/shared/constants";
 
 export const ProductInformationScreen = () => {
+	const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 	const [count, setCount] = useState<number>(1);
 	const {
 		params: { id },
@@ -37,6 +43,7 @@ export const ProductInformationScreen = () => {
 			amount: count,
 		});
 		showToast(ToastType.SUCCESS, Messages.ADD_CART_SUCCESS);
+		navigation.goBack();
 	};
 
 	return (

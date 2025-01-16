@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text } from "react-native";
 import { Button } from "../button";
 import { styles } from "./success-message.styles";
 import { CheckCircleIcon } from "assets/icons/checkmark-circle";
@@ -17,13 +17,17 @@ export const SuccessMessage: React.FC<SuccessMessageProps> = ({
 }) => {
 	return (
 		<View style={styles.container}>
-			<CheckCircleIcon />
-			<Text style={styles.message}>{message}</Text>
-			<Button
-				title={buttonText}
-				onPress={onButtonPress}
-				buttonStyle={styles.button}
-			/>
+			<View style={styles.content}>
+				<CheckCircleIcon />
+				<Text style={styles.message}>{message}</Text>
+			</View>
+			<View>
+				<Button
+					title={buttonText}
+					onPress={onButtonPress}
+					buttonStyle={styles.button}
+				/>
+			</View>
 		</View>
 	);
 };

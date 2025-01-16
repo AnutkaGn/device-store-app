@@ -17,6 +17,8 @@ export const showToast = (
 		text1: title,
 		text2: message,
 		visibilityTime: 1000,
+		position: "top",
+		topOffset: 70,
 		text1Style: {
 			fontFamily: FONTS.POPPINS_SEMIBOLD,
 			fontSize: 14,

@@ -35,12 +35,12 @@ export const EditCartItemScreen = () => {
 
 	const handleSubmit = () => {
 		updateItemAmount(id, count);
-		navigation.navigate(NAVIGATION_KEYS.CART);
+		navigation.goBack();
 	};
 
 	const handleremoveItemFromCart = () => {
 		removeItemFromCart(id);
-		navigation.navigate(NAVIGATION_KEYS.CART);
+		navigation.goBack();
 	};
 	return (
 		<Layout>

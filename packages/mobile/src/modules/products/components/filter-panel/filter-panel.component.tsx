@@ -76,7 +76,10 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({ onFilterChange }) => {
 						/>
 					</TouchableOpacity>
 				</View>
-				<TouchableOpacity onPress={handleReset} style={styles.icon_cross_button}>
+				<TouchableOpacity
+					onPress={handleReset}
+					style={styles.icon_cross_button}
+				>
 					<CrossIcon />
 				</TouchableOpacity>
 			</View>

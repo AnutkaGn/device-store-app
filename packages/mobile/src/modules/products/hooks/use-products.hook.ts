@@ -74,14 +74,13 @@ export const useProducts = () => {
 		if (products.length < total) {
 			const nextPage = page + 1;
 			setPage(nextPage);
-
-			console.log(products.length, total, nextPage);
 			mutateAsync({ params: filters, currentPage: nextPage });
 		}
 	};
 
 	const onRefresh = async () => {
 		setRefreshing(true);
+		setPage(1);
 		await mutateAsync({ params: filters, currentPage: 1 });
 		setRefreshing(false);
 	};
