@@ -2,15 +2,15 @@ import { StyleSheet } from "react-native";
 import { COLORS } from "src/shared/styles";
 
 export const styles = StyleSheet.create({
-	safeArea: {
+	safe_area: {
 		flex: 1,
-	},
-	container: {
-		flexGrow: 1,
-		padding: 20,
 		backgroundColor: COLORS.background,
+	},
+	scroll_container: {
+		flexGrow: 1,
 	},
 	content: {
 		flex: 1,
+		padding: 20,
 	},
 });

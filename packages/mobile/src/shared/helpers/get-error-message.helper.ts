@@ -1,5 +1,15 @@
-export const getErrorMessage = (messages?: string[] | string): string => {
-	if (typeof messages === "string") return messages;
-	if (Array.isArray(messages)) return messages.join(", ");
+export const getErrorMessage = (
+	error?: string[] | string | { message: string; [key: string]: unknown },
+): string => {
+	console.log(error);
+	if (typeof error === "string") {
+		return error;
+	}
+	if (Array.isArray(error)) {
+		return error.join(", ");
+	}
+	if (typeof error === "object" && error !== null && "message" in error) {
+		return error.message;
+	}
 	return "Something went wrong. Please try again.";
 };

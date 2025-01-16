@@ -7,7 +7,7 @@ type IconProps = {
   color?: string;
 };
 
-export const CloseIcon: React.FC<IconProps> = ({ width = 16, height = 29, color = "#000000" }) => {
+export const BackArrowIcon: React.FC<IconProps> = ({ width = 16, height = 29, color = "#000000" }) => {
   return (
     <Svg
       width={width}

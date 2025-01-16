@@ -6,7 +6,7 @@ import { COLORS } from "src/shared/styles";
 export const Loader: React.FC = () => {
 	return (
 		<View style={styles.container}>
-			<ActivityIndicator size={80} color={COLORS.background_blue} />
+			<ActivityIndicator size={60} color={COLORS.background_blue} />
 		</View>
 	);
 };
