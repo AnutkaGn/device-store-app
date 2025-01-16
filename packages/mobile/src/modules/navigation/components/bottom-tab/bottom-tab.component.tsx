@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { COLORS } from "src/shared/styles";
+import { COLORS, FONTS } from "src/shared/styles";
 import { NAVIGATION_KEYS } from "../../types";
 import {
 	OrdersStackScreens,
@@ -10,8 +10,22 @@ import {
 import { SettingsIcon } from "assets/icons/settings";
 import { ProductsIcon } from "assets/icons/products";
 import { OrdersIcon } from "assets/icons/orders";
+import { View, Text, StyleSheet } from "react-native";
 
 const Tab = createBottomTabNavigator();
+
+const styles = StyleSheet.create({
+	tabIconContainer: {
+		alignItems: "center",
+	},
+	tabIcon: {
+		marginBottom: 4, // Відступ між іконкою та текстом
+	},
+	tabLabel: {
+		fontSize: 12,
+		color: COLORS.text_primary,
+	},
+});
 
 export const BottomTab = () => {
 	return (
@@ -20,6 +34,20 @@ export const BottomTab = () => {
 				headerShown: false,
 				tabBarActiveTintColor: COLORS.background_blue,
 				tabBarInactiveTintColor: COLORS.text_primary,
+				tabBarStyle: {
+					height: 73,
+					paddingBottom: 10,
+					paddingTop: 8,
+					elevation: 0,
+					shadowOpacity: 0,
+					borderTopWidth: 0,
+					backgroundColor: COLORS.white,
+				},
+				tabBarLabelStyle: {
+					marginTop: 4,
+					fontSize: 14,
+					fontFamily: FONTS.POPPINS_REGULAR,
+				},
 			}}
 		>
 			<Tab.Screen
