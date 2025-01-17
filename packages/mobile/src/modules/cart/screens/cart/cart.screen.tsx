@@ -11,7 +11,7 @@ export const CartScreen = () => {
 	const handleSubmit = () => {};
 	return (
 		<Layout isScrollable={false}>
-			<Header title="Cart" showBackButton showCartIcon />
+			<Header title="Cart" showBackButton />
 			<Text style={styles.text}>Total amount: ${totalPrice.toFixed(2)}</Text>
 			<ProductCardList products={cart} onDeleteProduct={removeItemFromCart} />
 			<View style={styles.container_button}>

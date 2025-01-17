@@ -44,7 +44,7 @@ export const EditCartItemScreen = () => {
 	};
 	return (
 		<Layout>
-			<Header title="Product Information" showBackButton showCartIcon />
+			<Header title="Product Information" showBackButton />
 			{loading ? (
 				<Loader />
 			) : (
