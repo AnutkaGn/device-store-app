@@ -54,12 +54,8 @@ export const useProducts = () => {
 			setTotal(response.data.total);
 		},
 		onError: (error) => {
-			if (error.response?.status === 401) {
-				setAccessToken(null);
-			} else {
-				const errorMessage = getErrorMessage(error.response?.data?.message);
-				showToast(ToastType.ERROR, errorMessage);
-			}
+			const errorMessage = getErrorMessage(error.response?.data?.message);
+			showToast(ToastType.ERROR, errorMessage);
 		},
 	});
 

@@ -1,8 +1,9 @@
 import React from "react";
-import { FlatList, RefreshControl } from "react-native";
+import { FlatList, RefreshControl, Text } from "react-native";
 import { ProductItem } from "../product-item";
 import { ProductListItem } from "src/services/product";
 import { Loader } from "src/shared/componetnts";
+import { styles } from "./product-list.styles";
 
 interface ProductListProps {
 	products: ProductListItem[];
@@ -28,13 +29,18 @@ export const ProductList: React.FC<ProductListProps> = ({
 		/>
 	);
 
+	const renderEmptyList = () => (
+		<Text style={styles.text}>No products available.</Text>
+	);
+
 	return (
 		<FlatList
 			data={products}
 			renderItem={renderItem}
 			keyExtractor={(item) => item.id}
 			onEndReached={onLoadMore}
-			ListFooterComponent={loading ? <Loader /> : null}
+			ListFooterComponent={loading && products.length > 0 ? <Loader /> : null}
+			ListEmptyComponent={renderEmptyList}
 			refreshControl={
 				<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
 			}

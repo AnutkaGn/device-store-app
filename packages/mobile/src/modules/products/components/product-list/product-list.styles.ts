@@ -5,7 +5,7 @@ export const styles = StyleSheet.create({
 	text: {
 		fontFamily: FONTS.POPPINS_SEMIBOLD,
 		alignSelf: "center",
-		marginBlockStart: "50%",
+		marginBlockStart: "30%",
 		color: COLORS.text_primary,
 		fontSize: 16,
 	},
