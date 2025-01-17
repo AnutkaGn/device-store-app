@@ -15,14 +15,23 @@ export class IsExist implements NestMiddleware {
 			throw new NotFoundException(Messages.ID_PARAMETER_REQUIRED);
 		}
 
-		const modelHandler = this.modelHandlers[model];
+		const modelDelegate = this.prisma[
+			model as keyof PrismaService
+		] as unknown as {
+			findUnique: (args: {
+				where: Record<string, unknown>;
+			}) => Promise<unknown>;
+		};
 
-		if (!modelHandler) {
+		if (!modelDelegate) {
 			throw new NotFoundException(Messages.INVALID_MODEL(model));
 		}
 
 		try {
-			const isExist = await modelHandler(id);
+			const isExist = await modelDelegate.findUnique({
+				where: { id },
+			});
+
 			if (!isExist) {
 				throw new NotFoundException(Messages.RESOURCE_NOT_FOUND(model, id));
 			}
@@ -31,14 +40,6 @@ export class IsExist implements NestMiddleware {
 			throw new NotFoundException(Messages.ERROR_FETCHING_RESOURCE(id));
 		}
 	}
-
-	private readonly modelHandlers: Record<
-		string,
-		(id: string) => Promise<unknown>
-	> = {
-		product: (id: string) => this.prisma.product.findUnique({ where: { id } }),
-		user: (id: string) => this.prisma.user.findUnique({ where: { id } }),
-	};
 
 	private extractModel(req: Request): string {
 		const path = req.originalUrl || req.path;

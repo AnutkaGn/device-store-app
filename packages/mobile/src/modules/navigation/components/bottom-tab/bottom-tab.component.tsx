@@ -1,6 +1,6 @@
 import * as React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { COLORS } from "src/shared/styles";
+import { COLORS, FONTS } from "src/shared/styles";
 import { NAVIGATION_KEYS } from "../../types";
 import {
 	OrdersStackScreens,
@@ -20,6 +20,20 @@ export const BottomTab = () => {
 				headerShown: false,
 				tabBarActiveTintColor: COLORS.background_blue,
 				tabBarInactiveTintColor: COLORS.text_primary,
+				tabBarStyle: {
+					height: 73,
+					paddingBottom: 10,
+					paddingTop: 8,
+					elevation: 0,
+					shadowOpacity: 0,
+					borderTopWidth: 0,
+					backgroundColor: COLORS.white,
+				},
+				tabBarLabelStyle: {
+					marginTop: 4,
+					fontSize: 14,
+					fontFamily: FONTS.POPPINS_REGULAR,
+				},
 			}}
 		>
 			<Tab.Screen

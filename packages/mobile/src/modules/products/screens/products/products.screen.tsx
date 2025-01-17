@@ -1,24 +1,31 @@
 import React from "react";
-import { View, Text } from "react-native";
-import { StyleSheet } from "react-native";
-import { FONTS } from "src/shared/styles";
+import { Header } from "src/shared/componetnts/header";
+import { Layout } from "src/shared/componetnts";
+import { FilterPanel } from "../../components/filter-panel";
+import { ProductList } from "../../components/product-list";
+import { useProducts } from "../../hooks/use-products.hook";
 
 export const ProductsScreen = () => {
+	const {
+		products,
+		loading,
+		updateFilters,
+		loadMoreProducts,
+		refreshing,
+		onRefresh,
+	} = useProducts();
+
 	return (
-		<View style={styles.container}>
-			<Text style={styles.text}>Products</Text>
-		</View>
+		<Layout isScrollable={false}>
+			<Header title="Products" showCartIcon />
+			<FilterPanel onFilterChange={updateFilters} />
+			<ProductList
+				products={products}
+				loading={loading}
+				onLoadMore={loadMoreProducts}
+				onRefresh={onRefresh}
+				refreshing={refreshing}
+			/>
+		</Layout>
 	);
 };
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	text: {
-		fontFamily: FONTS.POPPINS_SEMIBOLD,
-		fontSize: 24,
-	},
-});

@@ -1,11 +1,5 @@
 import React, { useState, useRef } from "react";
-import {
-	View,
-	Text,
-	TextInput,
-	Platform,
-	TouchableWithoutFeedback,
-} from "react-native";
+import { View, Text, TextInput, TouchableWithoutFeedback } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Button } from "../button";
 import { styles } from "./verification-code-form.styles";

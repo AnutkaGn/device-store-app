@@ -30,7 +30,7 @@ export class ProductService {
 		query: GetProductsQueryDto,
 	): Promise<ResponseDto<PaginatedResponse<GetAllProduct>>> {
 		const { name, sortByPrice, page, limit } = query;
-		const skip = (page - 1) * limit;
+		const skip = (Number(page) - 1) * limit;
 
 		const where = this.buildWhereClause(name);
 		const orderBy = this.buildOrderByClause(sortByPrice);
@@ -39,7 +39,7 @@ export class ProductService {
 			where,
 			orderBy,
 			skip,
-			take: limit,
+			take: Number(limit),
 			select: {
 				id: true,
 				name: true,

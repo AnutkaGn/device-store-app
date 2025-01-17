@@ -6,6 +6,7 @@ import {
 	Delete,
 	Body,
 	Param,
+	Query,
 } from "@nestjs/common";
 import { ProductService } from "./product.service";
 import { CreateProductDto } from "./dto/create-product.dto";
@@ -30,7 +31,7 @@ export class ProductController {
 
 	@Get()
 	async findAll(
-		@Body() query: GetProductsQueryDto,
+		@Query() query: GetProductsQueryDto,
 	): Promise<ResponseDto<PaginatedResponse<GetAllProduct>>> {
 		return this.productService.findAll(query);
 	}

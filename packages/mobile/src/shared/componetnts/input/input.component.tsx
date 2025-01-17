@@ -38,6 +38,7 @@ type InputProps<
 		  >
 		| undefined;
 	label?: string;
+	placeholder?: string;
 	extraInputContainerStyles?: StyleProp<ViewStyle>;
 	extraErrorStyles?: StyleProp<TextStyle>;
 	secureTextEntry?: boolean;
@@ -52,6 +53,7 @@ export function Input<
 	rules,
 	defaultValue,
 	label,
+	placeholder,
 	extraInputContainerStyles,
 	extraErrorStyles = {},
 	secureTextEntry = false,
@@ -103,6 +105,7 @@ export function Input<
 				autoCapitalize="none"
 				ref={inputRef}
 				secureTextEntry={!showPassword}
+				placeholder={placeholder}
 			/>
 			{secureTextEntry && (
 				<TouchableOpacity

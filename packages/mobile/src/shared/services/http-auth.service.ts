@@ -1,6 +1,7 @@
 import type { HttpService } from "./http.service";
 
 import type { IHttpConfig, IMap } from "./types";
+import { useAuthStore } from "src/store";
 
 export class EnhancedWithAuthHttpService {
 	constructor(private readonly httpService: HttpService) {
@@ -56,11 +57,22 @@ export class EnhancedWithAuthHttpService {
 	}
 
 	private async attachAuthHeader(config: IHttpConfig): Promise<IHttpConfig> {
+		const token = await this.getAuthToken();
 		return {
 			...config,
 			headers: {
 				...config.headers,
+				Authorization: `Bearer ${token}`,
 			},
 		};
+	}
+
+	private async getAuthToken(): Promise<string> {
+		const accessToken = useAuthStore.getState().accessToken;
+
+		if (!accessToken) {
+			throw new Error("Auth token is missing");
+		}
+		return accessToken;
 	}
 }

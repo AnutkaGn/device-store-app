@@ -5,14 +5,24 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 type LayoutProps = {
 	children: React.ReactNode;
+	isScrollable?: boolean;
 };
 
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
+export const Layout: React.FC<LayoutProps> = ({
+	children,
+	isScrollable = true,
+}) => {
+	const content = <View style={styles.content}>{children}</View>;
+
 	return (
-		<SafeAreaView style={styles.safeArea}>
-			<ScrollView contentContainerStyle={styles.container}>
-				<View style={styles.content}>{children}</View>
-			</ScrollView>
+		<SafeAreaView style={styles.safe_area}>
+			{isScrollable ? (
+				<ScrollView contentContainerStyle={styles.scroll_container}>
+					{content}
+				</ScrollView>
+			) : (
+				content
+			)}
 		</SafeAreaView>
 	);
 };

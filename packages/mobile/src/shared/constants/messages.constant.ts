@@ -14,4 +14,5 @@ export const Messages = {
 	LOGOUT: "You have logged out successfully.",
 	PASSWORDS_DO_NOT_MATCH: "Passwords do not match.",
 	INVALID_PHONE: "Invalid phone number.",
+	ADD_CART_SUCCESS: "Product added to cart!",
 };
