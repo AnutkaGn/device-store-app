@@ -1,6 +1,7 @@
 import React from "react";
-import { FlatList } from "react-native";
+import { FlatList, Text } from "react-native";
 import { ProductCard } from "../product-card";
+import { styles } from "./product-card.styles";
 
 interface ProductCardItem {
 	id: string;
@@ -28,11 +29,16 @@ export const ProductCardList: React.FC<ProductCardListProps> = ({
 		/>
 	);
 
+	const renderEmptyList = () => (
+			<Text  style={styles.text}>Your list is empty.</Text>
+		);
+
 	return (
 		<FlatList
 			data={products}
 			renderItem={renderItem}
 			keyExtractor={(item) => item.id}
+			ListEmptyComponent={renderEmptyList}
 		/>
 	);
 };

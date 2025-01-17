@@ -40,10 +40,10 @@ export const ProductList: React.FC<ProductListProps> = ({
 			keyExtractor={(item) => item.id}
 			onEndReached={onLoadMore}
 			ListFooterComponent={loading && products.length > 0 ? <Loader /> : null}
-			ListEmptyComponent={renderEmptyList}
 			refreshControl={
 				<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
 			}
+			ListEmptyComponent={renderEmptyList}
 		/>
 	);
 };
