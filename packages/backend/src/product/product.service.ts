@@ -2,11 +2,12 @@ import { HttpStatus, Injectable } from "@nestjs/common";
 import { Prisma, Product } from "@prisma/client";
 import { PrismaService } from "@/prisma/prisma.service";
 import { ResponseDto } from "@/common/dto/response.dto";
+import { PaginatedResponse } from "@/common/dto/paginated-response.dto";
 import { Messages } from "@/common/constants/messages.constant";
 import { SortOrder } from "@/common/enums/sort-order.enum";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
-import { GetAllProduct, PaginatedResponse } from "./product.type";
+import { GetAllProduct } from "./product.type";
 import { GetProductsQueryDto } from "./dto/get-products-query.dto";
 
 @Injectable()

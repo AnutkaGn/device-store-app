@@ -1,0 +1,17 @@
+interface ProductInfo {
+	name: string;
+	price: number;
+}
+
+export interface OrderDetail {
+	id: string;
+	quantity: number;
+	priceAtPurchase: number;
+}
+
+export interface OrderDetailInfo {
+	id: string;
+	quantity: number;
+	priceAtPurchase: number;
+	product: ProductInfo;
+}
