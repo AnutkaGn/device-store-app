@@ -10,11 +10,13 @@ import { IsExist } from "@/middlewares/is-exist.middleware";
 
 @Module({
 	controllers: [ProductController],
-	providers: [ProductService],
+	providers: [ProductService, IsExist],
 })
 export class ProductModule implements NestModule {
+	constructor(private readonly isExistMiddleware: IsExist) {}
+
 	configure(consumer: MiddlewareConsumer) {
-		consumer.apply(IsExist).forRoutes(
+		consumer.apply(this.isExistMiddleware.use("product", "id")).forRoutes(
 			{
 				path: "product/:id",
 				method: RequestMethod.GET,
