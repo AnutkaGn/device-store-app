@@ -20,12 +20,12 @@ export interface UpdateOrderDetailsPayload {
 	quantity: number;
 }
 
-export interface updateDeliveryStatusPayload {
+export interface UpdateDeliveryStatusPayload {
 	id: string;
 	deliveryStatus: DeliveryStatus;
 }
 
-export interface updatePaymentStatusPayload {
+export interface UpdatePaymentStatusPayload {
 	id: string;
 	paymentStatus: PaymentStatus;
 }

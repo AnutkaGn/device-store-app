@@ -37,18 +37,18 @@ export class OrderController {
 	@Roles(UserRole.ADMIN)
 	@Post()
 	async create(
-		@Body() createOrderDto: CreateOrderDto,
+		@Body() data: CreateOrderDto,
 		@GetCurrentUser() userId: string,
 	): Promise<ResponseDto<Order>> {
-		return this.orderService.create({ ...createOrderDto, userId });
+		return this.orderService.create({ ...data, userId });
 	}
 
 	@Patch(":id")
 	async updateOrderDetailsQuantity(
 		@Param("id") id: string,
-		@Body() updateOrderDetails: UpdateOrderDetailsPayload,
+		@Body() data: UpdateOrderDetailsPayload,
 	): Promise<ResponseDto<Order>> {
-		return this.orderService.updateOrderDetailQuantity(id, updateOrderDetails);
+		return this.orderService.updateOrderDetailQuantity(id, data);
 	}
 
 	@Roles(UserRole.ADMIN)

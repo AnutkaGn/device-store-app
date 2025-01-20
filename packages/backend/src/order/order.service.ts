@@ -7,9 +7,9 @@ import { Order } from "@prisma/client";
 import {
 	FullOrder,
 	GetAllOrdersQuery,
-	updateDeliveryStatusPayload,
+	UpdateDeliveryStatusPayload,
 	UpdateOrderDetailsPayload,
-	updatePaymentStatusPayload,
+	UpdatePaymentStatusPayload,
 } from "./order.type";
 import { CreateOrderDto } from "./dto/create-order.dto";
 import { PaginatedResponse } from "@/common/dto/paginated-response.dto";
@@ -147,7 +147,7 @@ export class OrderService {
 	}
 
 	async updateDeliveryStatus(
-		data: updateDeliveryStatusPayload,
+		data: UpdateDeliveryStatusPayload,
 	): Promise<ResponseDto<Order>> {
 		const { id, deliveryStatus } = data;
 		const order = await this.prisma.order.update({
@@ -163,7 +163,7 @@ export class OrderService {
 	}
 
 	async updatePaymentStatus(
-		data: updatePaymentStatusPayload,
+		data: UpdatePaymentStatusPayload,
 	): Promise<ResponseDto<Order>> {
 		const { id, paymentStatus } = data;
 		const order = await this.prisma.order.update({
@@ -218,10 +218,9 @@ export class OrderService {
 
 	private async recalculateTotalAmount(orderId: string): Promise<number> {
 		const orderDetails = await this.orderDetailsService.getByOrderId(orderId);
-
 		if (orderDetails.data) {
 			const totalAmount = orderDetails.data.reduce((total, detail) => {
-				return total + detail.quantity * detail.product.price;
+				return total + detail.quantity * detail.priceAtPurchase;
 			}, 0);
 
 			return parseFloat(totalAmount.toFixed(2));

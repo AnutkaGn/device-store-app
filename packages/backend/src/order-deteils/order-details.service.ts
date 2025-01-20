@@ -1,4 +1,9 @@
-import { HttpStatus, Injectable, NotFoundException } from "@nestjs/common";
+import {
+	HttpStatus,
+	Injectable,
+	InternalServerErrorException,
+	NotFoundException,
+} from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
 import { CreateOrderDetailsDto } from "./dto/create-oder-details.dto";
 
@@ -12,10 +17,8 @@ import { Messages } from "@/common/constants/messages.constant";
 export class OrderDetailsService {
 	constructor(private readonly prisma: PrismaService) {}
 
-	async create(
-		orderDetailsDto: CreateOrderDetailsDto,
-	): Promise<ResponseDto<null>> {
-		const { orderId, productId, quantity, priceAtPurchase } = orderDetailsDto;
+	async create(data: CreateOrderDetailsDto): Promise<ResponseDto<null>> {
+		const { orderId, productId, quantity, priceAtPurchase } = data;
 		try {
 			await this.prisma.orderDetail.create({
 				data: {
@@ -31,7 +34,7 @@ export class OrderDetailsService {
 				message: Messages.ORDER_CREATED,
 			};
 		} catch (error) {
-			throw new Error(Messages.ORDER_CREATION_FAILED);
+			throw new InternalServerErrorException(Messages.ORDER_CREATION_FAILED);
 		}
 	}
 
@@ -71,9 +74,10 @@ export class OrderDetailsService {
 		if (!existingOrderDetail) {
 			throw new NotFoundException(Messages.ORDER_DETAILS_NOT_FOUND);
 		}
+
 		const orderDetail = await this.prisma.orderDetail.update({
 			where: { id },
-			data: { quantity: quantity },
+			data: { quantity },
 		});
 
 		return {
