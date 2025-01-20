@@ -38,6 +38,17 @@ export class OrderDetailsService {
 		}
 	}
 
+	async getById(id: string): Promise<ResponseDto<OrderDetail>> {
+		const orderDetail = await this.prisma.orderDetail.findUnique({
+			where: { id },
+		  });
+		return {
+			statusCode: HttpStatus.OK,
+			message: Messages.ORDER_RETRIEVED,
+			data: orderDetail,
+		}
+	  }
+
 	async getByOrderId(orderId: string): Promise<ResponseDto<OrderDetailInfo[]>> {
 		const orderDetails = await this.prisma.orderDetail.findMany({
 			where: {
@@ -45,6 +56,7 @@ export class OrderDetailsService {
 			},
 			select: {
 				id: true,
+				productId: true,
 				quantity: true,
 				priceAtPurchase: true,
 				product: {

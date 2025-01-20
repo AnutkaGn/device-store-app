@@ -97,6 +97,23 @@ export class ProductService {
 		};
 	}
 
+	async updateStock(productId: string, quantity: number): Promise<ResponseDto<Product>> {
+		const product = await this.prisma.product.update({
+		  where: { id: productId },
+		  data: {
+			stock: {
+			  increment: quantity,
+			},
+		  },
+		});
+
+		return {
+			statusCode: HttpStatus.OK,
+			message: Messages.PRODUCT_UPDATED,
+			data: product
+		};
+	}
+
 	private buildWhereClause(
 		name?: string,
 	): Prisma.ProductWhereInput | undefined {

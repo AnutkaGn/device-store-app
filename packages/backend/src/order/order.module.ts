@@ -8,10 +8,11 @@ import { OrderService } from "./order.service";
 import { OrderController } from "./order.controller";
 import { OrderDetailsService } from "@/order-deteils/order-details.service";
 import { IsExist } from "@/middlewares/is-exist.middleware";
+import { ProductService } from "@/product/product.service";
 
 @Module({
 	controllers: [OrderController],
-	providers: [OrderService, OrderDetailsService, IsExist],
+	providers: [OrderService, OrderDetailsService, IsExist, ProductService],
 })
 export class OrderModule implements NestModule {
 	constructor(private readonly isExistMiddleware: IsExist) {}

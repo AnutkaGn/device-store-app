@@ -2,6 +2,7 @@ import { HttpStatus, Injectable } from "@nestjs/common";
 import { PrismaService } from "@/prisma/prisma.service";
 import { ResponseDto } from "@/common/dto/response.dto";
 import { OrderDetailsService } from "@/order-deteils/order-details.service";
+import { ProductService } from "@/product/product.service";
 import { SORT_ORDER } from "@/common/enums/sort-order.enum";
 import { Order } from "@prisma/client";
 import {
@@ -20,6 +21,7 @@ export class OrderService {
 	constructor(
 		private prisma: PrismaService,
 		private orderDetailsService: OrderDetailsService,
+		private productService: ProductService,
 	) {}
 
 	async getAll(
@@ -106,6 +108,7 @@ export class OrderService {
 				...detail,
 				orderId: order.id,
 			});
+			await this.productService.updateStock(detail.productId, -detail.quantity);
 		}
 
 		return {
@@ -120,6 +123,9 @@ export class OrderService {
 		data: UpdateOrderDetailsPayload,
 	): Promise<ResponseDto<Order>> {
 		const { orderDetailId, quantity } = data;
+
+		const orderDetail = await this.orderDetailsService.getById(orderDetailId);
+
 		const updatedOrderDetail = await this.orderDetailsService.updateQuantity({
 			id: orderDetailId,
 			quantity,
@@ -133,6 +139,9 @@ export class OrderService {
 		}
 
 		const totalAmount = await this.recalculateTotalAmount(id);
+
+		const quantityChange = quantity - orderDetail.data!.quantity;
+		await this.productService.updateStock(updatedOrderDetail.data!.productId, -quantityChange);
 
 		const updatedOrder = await this.prisma.order.update({
 			where: { id },
@@ -179,6 +188,10 @@ export class OrderService {
 	}
 
 	async delete(id: string): Promise<ResponseDto<Order>> {
+		const orderDetails = await this.orderDetailsService.getByOrderId(id);
+		for (const detail of orderDetails.data!) {
+			await this.productService.updateStock(detail.productId, detail.quantity);
+		}
 		const order = await this.prisma.order.delete({
 			where: { id },
 		});
@@ -194,6 +207,8 @@ export class OrderService {
 		const id = orderDetail!.data!.orderId;
 
 		const totalAmount = await this.recalculateTotalAmount(id);
+
+		await this.productService.updateStock(orderDetail.data!.productId, orderDetail.data!.quantity);
 
 		if (totalAmount === 0) {
 			await this.delete(id);

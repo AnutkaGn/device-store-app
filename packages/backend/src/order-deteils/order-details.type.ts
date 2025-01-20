@@ -11,6 +11,7 @@ export interface OrderDetail {
 
 export interface OrderDetailInfo {
 	id: string;
+	productId: string
 	quantity: number;
 	priceAtPurchase: number;
 	product: ProductInfo;
