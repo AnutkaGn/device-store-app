@@ -19,6 +19,8 @@ model User {
   verificationCode Int?
   createdAt        DateTime  @default(now())
   updatedAt        DateTime  @updatedAt
+
+  orders           Order[]
 }
 
 enum UserRole {
@@ -35,4 +37,42 @@ model Product {
   category    String
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
+
+  orderDetails OrderDetail[]
+}
+
+model Order {
+  id             String         @id @default(uuid()) @db.Uuid
+  userId         String         @db.Uuid
+  totalAmount    Float         
+  paymentStatus  PaymentStatus  @default(PENDING)
+  deliveryStatus DeliveryStatus @default(PLACED)
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orderDetails   OrderDetail[]
+}
+
+model OrderDetail {
+  id              String  @id @default(uuid()) @db.Uuid
+  orderId         String  @db.Uuid
+  productId       String  @db.Uuid
+  quantity        Int
+  priceAtPurchase Float
+
+  order           Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product         Product @relation(fields: [productId], references: [id])
+}
+
+enum PaymentStatus {
+  SUCCESS
+  FAILED
+  PENDING
+}
+
+enum DeliveryStatus {
+  PLACED
+  IN_TRANSIT
+  DELIVERED
 }

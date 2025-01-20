@@ -12,6 +12,8 @@ import { UserService } from "./user/user.service";
 import { EmailService } from "./email/email.service";
 import { JwtService } from "@nestjs/jwt";
 import { RolesGuard } from "./common/guards/roles.guard";
+import { OrderModule } from "./order/order.module";
+import { OrderDetailsModule } from "./order-deteils/order-details.module";
 
 @Module({
 	imports: [
@@ -23,6 +25,8 @@ import { RolesGuard } from "./common/guards/roles.guard";
 		UserModule,
 		EmailModule,
 		ProductModule,
+		OrderModule,
+		OrderDetailsModule,
 	],
 	controllers: [],
 	providers: [
