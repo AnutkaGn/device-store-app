@@ -30,8 +30,8 @@ export const ProductCardList: React.FC<ProductCardListProps> = ({
 	);
 
 	const renderEmptyList = () => (
-			<Text  style={styles.text}>Your list is empty.</Text>
-		);
+		<Text style={styles.text}>Your list is empty.</Text>
+	);
 
 	return (
 		<FlatList
