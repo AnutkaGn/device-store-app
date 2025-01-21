@@ -44,6 +44,7 @@ export const ProductList: React.FC<ProductListProps> = ({
 				<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
 			}
 			ListEmptyComponent={renderEmptyList}
+			showsVerticalScrollIndicator={false}
 		/>
 	);
 };

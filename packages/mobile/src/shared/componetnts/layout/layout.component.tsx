@@ -17,7 +17,10 @@ export const Layout: React.FC<LayoutProps> = ({
 	return (
 		<SafeAreaView style={styles.safe_area}>
 			{isScrollable ? (
-				<ScrollView contentContainerStyle={styles.scroll_container}>
+				<ScrollView
+					contentContainerStyle={styles.scroll_container}
+					showsVerticalScrollIndicator={false}
+				>
 					{content}
 				</ScrollView>
 			) : (

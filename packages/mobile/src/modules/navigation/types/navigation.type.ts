@@ -25,7 +25,7 @@ export type RootStackParamList = {
 	[NAVIGATION_KEYS.SETTINGS]: undefined;
 	[NAVIGATION_KEYS.ORDERS]: undefined;
 	[NAVIGATION_KEYS.ORDERS_DETAILS]: { id: string };
-	[NAVIGATION_KEYS.EDIT_ORDER]: { orderId: string; orderDeteilId: string };
+	[NAVIGATION_KEYS.EDIT_ORDER]: { id: string };
 	[NAVIGATION_KEYS.PRODUCTS]: undefined;
 	[NAVIGATION_KEYS.PRODUCT_INFORMATION]: { id: string };
 	[NAVIGATION_KEYS.CART]: undefined;

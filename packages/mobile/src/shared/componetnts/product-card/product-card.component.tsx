@@ -14,6 +14,7 @@ interface ProductCardProps {
 	amount: number;
 	price: number;
 	onDelete: (id: string) => void;
+	navigationKey: NAVIGATION_KEYS.EDIT_CART_ITEM | NAVIGATION_KEYS.EDIT_ORDER;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
@@ -22,11 +23,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 	amount,
 	price,
 	onDelete,
+	navigationKey,
 }) => {
 	const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
 	const handlePress = () => {
-		navigation.navigate(NAVIGATION_KEYS.EDIT_CART_ITEM, { id });
+		navigation.navigate(navigationKey, { id });
 	};
 
 	return (
