@@ -7,7 +7,8 @@ import {
 	RootStackParamList,
 } from "src/modules/navigation/types";
 import { Order } from "src/services/order";
-import { formatDate } from "src/shared/helpers/format-date.helper";
+import { formatDate, convertToTitleCase } from "src/shared/helpers";
+import { useOrders } from "../../hooks/use-orders.hook";
 
 interface OrderCardProps {
 	order: Order;
@@ -32,15 +33,19 @@ export const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
 			</View>
 			<View style={styles.container}>
 				<Text style={styles.bold_text}>Payment Status: </Text>
-				<Text style={styles.text}>{order.paymentStatus}</Text>
+				<Text style={styles.text}>
+					{convertToTitleCase(order.paymentStatus)}
+				</Text>
 			</View>
 			<View style={styles.container}>
 				<Text style={styles.bold_text}>Delivery Status: </Text>
-				<Text style={styles.text}>{order.deliveryStatus}</Text>
+				<Text style={styles.text}>
+					{convertToTitleCase(order.deliveryStatus)}
+				</Text>
 			</View>
 			<View style={styles.container}>
 				<Text style={styles.bold_text}>Total: </Text>
-				<Text style={styles.text}>${order.totalAmount}</Text>
+				<Text style={styles.text}>${(order.totalAmount).toFixed(2)}</Text>
 			</View>
 		</TouchableOpacity>
 	);

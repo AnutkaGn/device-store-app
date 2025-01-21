@@ -7,35 +7,34 @@ import { styles } from "./order-list.styles";
 
 interface OrderListProps {
 	orders: Order[];
-	// loading: boolean;
-	// onLoadMore: () => void;
-	// onRefresh: () => void;
-	// refreshing: boolean;
+	loading: boolean;
+	onLoadMore: () => void;
+	onRefresh: () => void;
+	refreshing: boolean;
 }
 
 export const OrderList: React.FC<OrderListProps> = ({
 	orders,
-	// loading,
-	// onLoadMore,
-	// onRefresh,
-	// refreshing,
+	loading,
+	onLoadMore,
+	onRefresh,
+	refreshing,
 }) => {
 	const renderItem = ({ item }: { item: Order }) => <OrderCard order={item} />;
 
-	const renderEmptyList = () => (
-		<Text style={styles.text}>No products available.</Text>
-	);
+	const renderEmptyList = () => <Text style={styles.text}>No orders.</Text>;
 
 	return (
 		<FlatList
 			data={orders}
 			renderItem={renderItem}
 			keyExtractor={(item) => item.id}
-			// onEndReached={onLoadMore}
-			// ListFooterComponent={loading && products.length > 0 ? <Loader /> : null}
-			// refreshControl={
-			//     <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-			// }
+			showsVerticalScrollIndicator={false}
+			onEndReached={onLoadMore}
+			ListFooterComponent={loading && orders.length > 0 ? <Loader /> : null}
+			refreshControl={
+				<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+			}
 			ListEmptyComponent={renderEmptyList}
 		/>
 	);
