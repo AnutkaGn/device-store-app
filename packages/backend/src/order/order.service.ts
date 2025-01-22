@@ -141,7 +141,10 @@ export class OrderService {
 		const totalAmount = await this.recalculateTotalAmount(id);
 
 		const quantityChange = quantity - orderDetail.data!.quantity;
-		await this.productService.updateStock(updatedOrderDetail.data!.productId, -quantityChange);
+		await this.productService.updateStock(
+			updatedOrderDetail.data!.productId,
+			-quantityChange,
+		);
 
 		const updatedOrder = await this.prisma.order.update({
 			where: { id },
@@ -208,7 +211,10 @@ export class OrderService {
 
 		const totalAmount = await this.recalculateTotalAmount(id);
 
-		await this.productService.updateStock(orderDetail.data!.productId, orderDetail.data!.quantity);
+		await this.productService.updateStock(
+			orderDetail.data!.productId,
+			orderDetail.data!.quantity,
+		);
 
 		if (totalAmount === 0) {
 			await this.delete(id);
