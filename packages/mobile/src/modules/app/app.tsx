@@ -36,7 +36,7 @@ export const App = () => {
 	return (
 		<SafeAreaProvider>
 			<QueryClientProvider client={queryClient}>
-				<GestureHandlerRootView style={{ flex: 1 }}>
+				<GestureHandlerRootView>
 					<BottomSheetContext.Provider value={bottomSheet}>
 						<RootNavigator />
 						<Toast />
@@ -45,7 +45,6 @@ export const App = () => {
 							index={-1}
 							snapPoints={snapPoints}
 							enablePanDownToClose
-							style={{ flex: 1 }}
 						>
 							<CustomBottomSheet />
 						</BottomSheet>

@@ -1,23 +1,22 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import { styles } from "./filter-panel.styles";
-import { SORT_ORDER } from "src/shared/enum/sort-order.enum";
 import {
 	BottomSheetContext,
 	BottomSheetData,
 	IBottomSheetContext,
 } from "src/shared/context/bottom-sheet.context";
-import { underDampedSpringCalculations } from "react-native-reanimated/lib/typescript/animation/springUtils";
+import { SORT_ORDER } from "src/shared/enum/sort-order.enum";
 import { convertToTitleCase } from "src/shared/helpers";
+import { styles } from "./filter-panel.styles";
+import { GetAllOrdersQuery } from "src/services/order";
 
-export const FilterPanel = ({
-	onFilterChange,
-}: {
-	onFilterChange: (filters: any) => void;
-}) => {
+interface FilterPanelProps {
+	onFilterChange: (filters: Partial<GetAllOrdersQuery>) => void;
+}
+
+export const FilterPanel: React.FC<FilterPanelProps> = ({ onFilterChange }) => {
 	const {
 		showSheet,
-
 		paymentStatusFilter,
 		deliveryStatusFilter,
 		sortOrderFilter,

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Layout } from "src/shared/componetnts";
 import { Header } from "src/shared/componetnts/header";
-import { Text, View } from "react-native";
+import { Text } from "react-native";
 import { useOrderDetails } from "../../hooks/use-order-details.hook";
 import { ProductCardList } from "src/shared/componetnts/product-card-list";
 import { Loader } from "src/shared/componetnts";
@@ -9,10 +9,10 @@ import {
 	NAVIGATION_KEYS,
 	RootStackParamList,
 } from "src/modules/navigation/types";
-import { styles } from "./order-details.styles";
 import { useOrderStore } from "src/store/order.store";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { PayIcon } from "assets/icons/pay";
+import { styles } from "./order-details.styles";
 
 export const OrderDetailsScreen: React.FC = ({}) => {
 	const {

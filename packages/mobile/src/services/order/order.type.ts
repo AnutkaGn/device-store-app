@@ -29,7 +29,7 @@ export interface GetOrdersResponse {
 	};
 }
 
-export interface ProductInfo {
+interface ProductInfo {
 	name: string;
 	description: string;
 	price: number;
@@ -46,7 +46,7 @@ export interface OrderDetailInfo {
 	product: ProductInfo;
 }
 
-export interface FullOrderInfo extends Order {
+interface FullOrderInfo extends Order {
 	orderDetails: OrderDetailInfo[];
 }
 

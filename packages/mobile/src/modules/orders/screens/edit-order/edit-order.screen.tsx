@@ -15,6 +15,7 @@ export const EditOrderScreen = () => {
 	const navigation = useNavigation();
 	const { getOrderDetailById, updateOrderDetailQuantity, updateProductStock } =
 		useOrderStore();
+
 	const {
 		params: { id },
 	} = useRoute<RouteProp<RootStackParamList, NAVIGATION_KEYS.EDIT_ORDER>>();
@@ -28,7 +29,6 @@ export const EditOrderScreen = () => {
 	const handleSubmit = async () => {
 		const quantityChange = count - orderDetail!.quantity;
 		await updateQuantity({ orderDetailId: orderDetail!.id, quantity: count });
-
 		updateOrderDetailQuantity(orderDetail!.id, count);
 		updateProductStock(orderDetail!.productId, quantityChange);
 		navigation.goBack();

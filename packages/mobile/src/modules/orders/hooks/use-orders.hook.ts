@@ -55,6 +55,10 @@ export const useOrders = () => {
 		},
 	});
 
+	useEffect(() => {
+		mutateAsync({ params: filters, currentPage: 1 });
+	}, []);
+
 	const updateFilters = (newFilters: Partial<GetAllOrdersQuery>) => {
 		const updatedFilters = { ...filters, ...newFilters };
 		setFilters(updatedFilters);
@@ -76,10 +80,6 @@ export const useOrders = () => {
 		await mutateAsync({ params: filters, currentPage: 1 });
 		setRefreshing(false);
 	};
-
-	useEffect(() => {
-		mutateAsync({ params: filters, currentPage: 1 });
-	}, []);
 
 	return {
 		loading: isPending,

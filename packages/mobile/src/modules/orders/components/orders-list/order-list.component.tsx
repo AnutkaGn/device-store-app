@@ -2,7 +2,7 @@ import React from "react";
 import { FlatList, RefreshControl, Text } from "react-native";
 import { Order } from "src/services/order";
 import { Loader } from "src/shared/componetnts";
-import { OrderCard } from "../order-card/order-card.component";
+import { OrderCard } from "../order-card";
 import { styles } from "./order-list.styles";
 
 interface OrderListProps {
