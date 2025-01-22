@@ -8,7 +8,6 @@ import {
 } from "src/modules/navigation/types";
 import { Order } from "src/services/order";
 import { formatDate, convertToTitleCase } from "src/shared/helpers";
-import { useOrders } from "../../hooks/use-orders.hook";
 
 interface OrderCardProps {
 	order: Order;
@@ -45,7 +44,7 @@ export const OrderCard: React.FC<OrderCardProps> = ({ order }) => {
 			</View>
 			<View style={styles.container}>
 				<Text style={styles.bold_text}>Total: </Text>
-				<Text style={styles.text}>${(order.totalAmount).toFixed(2)}</Text>
+				<Text style={styles.text}>${order.totalAmount.toFixed(2)}</Text>
 			</View>
 		</TouchableOpacity>
 	);

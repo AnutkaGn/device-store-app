@@ -7,6 +7,7 @@ import {
 import { AxiosError } from "axios";
 import { getErrorMessage, showToast, ToastType } from "src/shared/helpers";
 import { IServerError } from "src/shared/services/types";
+import { Messages } from "src/shared/constants";
 
 export const useCreateOrder = () => {
 	const createOrder = async (
@@ -22,7 +23,7 @@ export const useCreateOrder = () => {
 	>({
 		mutationFn: createOrder,
 		onSuccess: (data) => {
-			showToast(ToastType.SUCCESS, "Order created successfully!");
+			showToast(ToastType.SUCCESS, Messages.ORDER_CREATED);
 		},
 		onError: (error) => {
 			const errorMessage = getErrorMessage(error.response?.data?.message);

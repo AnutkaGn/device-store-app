@@ -1,8 +1,4 @@
-import {
-	RouteProp,
-	useNavigation,
-	useRoute,
-} from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
 import {
 	NAVIGATION_KEYS,
@@ -17,7 +13,8 @@ import { useUpdateOrderDetailQuantity } from "../../hooks/use-update-order-quant
 
 export const EditOrderScreen = () => {
 	const navigation = useNavigation();
-	const { getOrderDetailById, updateOrderDetailQuantity } = useOrderStore();
+	const { getOrderDetailById, updateOrderDetailQuantity, updateProductStock } =
+		useOrderStore();
 	const {
 		params: { id },
 	} = useRoute<RouteProp<RootStackParamList, NAVIGATION_KEYS.EDIT_ORDER>>();
@@ -29,8 +26,11 @@ export const EditOrderScreen = () => {
 	const [count, setCount] = useState<number>(orderDetail!.quantity);
 
 	const handleSubmit = async () => {
+		const quantityChange = count - orderDetail!.quantity;
 		await updateQuantity({ orderDetailId: orderDetail!.id, quantity: count });
-		updateOrderDetailQuantity(orderDetail!.id, count)
+
+		updateOrderDetailQuantity(orderDetail!.id, count);
+		updateProductStock(orderDetail!.productId, quantityChange);
 		navigation.goBack();
 	};
 

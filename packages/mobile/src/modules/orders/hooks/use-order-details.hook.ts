@@ -10,6 +10,7 @@ import { getErrorMessage, showToast, ToastType } from "src/shared/helpers";
 import { IServerError } from "src/shared/services/types";
 import { useNavigation } from "@react-navigation/native";
 import { useOrderStore } from "src/store";
+import { Messages } from "src/shared/constants";
 
 export const useOrderDetails = (id: string) => {
 	const navigation = useNavigation();
@@ -51,7 +52,7 @@ export const useOrderDetails = (id: string) => {
 	>({
 		mutationFn: deleteOrderDetail,
 		onSuccess: () => {
-			showToast(ToastType.SUCCESS, "Item successfully removed.");
+			showToast(ToastType.SUCCESS, Messages.ITEM_DELETE);
 		},
 		onError: (error) => {
 			const errorMessage = getErrorMessage(error.response?.data?.message);
@@ -68,7 +69,7 @@ export const useOrderDetails = (id: string) => {
 	const handleDelete = async (orderDetailId: string) => {
 		if (data?.data.orderDetails.length === 1) {
 			await removeItem(orderDetailId);
-			showToast(ToastType.SUCCESS, "Order has been removed.");
+			showToast(ToastType.SUCCESS, Messages.ORDER_DELETE);
 			setOrderDeleted(true);
 			removeOrderById(id);
 			navigation.goBack();

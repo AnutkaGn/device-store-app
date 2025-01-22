@@ -10,7 +10,7 @@ import { styles } from "./button.styles";
 
 type ButtonProps = {
 	onPress: () => void;
-	title: string;
+	title: React.ReactNode | string;
 	buttonStyle?: ViewStyle;
 	textStyle?: TextStyle;
 	disabled?: boolean;
@@ -30,7 +30,11 @@ export const Button = ({
 				style={[styles.button, buttonStyle, disabled && styles.disabled_button]}
 				activeOpacity={disabled ? 1 : 0.7}
 			>
-				<Text style={[styles.button_text, textStyle]}>{title}</Text>
+				{typeof title === "string" ? (
+					<Text style={[styles.button_text, textStyle]}>{title}</Text>
+				) : (
+					title
+				)}
 			</TouchableOpacity>
 		</View>
 	);

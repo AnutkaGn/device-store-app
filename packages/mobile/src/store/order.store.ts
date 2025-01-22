@@ -1,8 +1,6 @@
 import { Order, OrderDetailInfo } from "src/services/order";
 import { create } from "zustand";
 
-
-
 interface OrderStore {
 	orderDetails: OrderDetailInfo[];
 	orders: Order[];
@@ -13,6 +11,7 @@ interface OrderStore {
 	getOrderDetailById: (id: string) => OrderDetailInfo | undefined;
 	updateOrderDetailQuantity: (id: string, quantity: number) => void;
 	getTotalAmount: (id: string) => number | undefined;
+	updateProductStock: (productId: string, quantityChange: number) => void;
 }
 
 export const useOrderStore = create<OrderStore>((set, get) => ({
@@ -32,7 +31,9 @@ export const useOrderStore = create<OrderStore>((set, get) => ({
 	setTotalAmount: (id, amount) => {
 		set((state) => ({
 			orders: state.orders.map((order) =>
-				order.id === id ? { ...order, totalAmount: parseFloat(amount.toFixed(2)) } : order,
+				order.id === id
+					? { ...order, totalAmount: parseFloat(amount.toFixed(2)) }
+					: order,
 			),
 		}));
 	},
@@ -48,6 +49,20 @@ export const useOrderStore = create<OrderStore>((set, get) => ({
 				detail.id === id ? { ...detail, quantity } : detail,
 			);
 			return { orderDetails: updatedDetails };
+		});
+	},
+	updateProductStock: (productId, quantityChange) => {
+		set((state) => {
+			const updatedOrderDetails = state.orderDetails.map((detail) => {
+				if (detail.productId === productId) {
+					const updatedProduct = { ...detail.product };
+					updatedProduct.stock -= quantityChange;
+					return { ...detail, product: updatedProduct };
+				}
+				return detail;
+			});
+
+			return { orderDetails: updatedOrderDetails };
 		});
 	},
 }));

@@ -1,14 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
-import {
-	orderService,
-	GetOrdersResponse,
-	GetAllOrdersQuery,
-	Order,
-} from "src/services/order";
-import { IServerError } from "src/shared/services/types";
-import { getErrorMessage, showToast, ToastType } from "src/shared/helpers";
 import { AxiosError } from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+	GetAllOrdersQuery,
+	GetOrdersResponse,
+	orderService,
+} from "src/services/order";
+import { getErrorMessage, showToast, ToastType } from "src/shared/helpers";
+import { IServerError } from "src/shared/services/types";
 import { useOrderStore } from "src/store";
 
 const PAGE_LIMIT = 10;
@@ -43,9 +42,10 @@ export const useOrders = () => {
 				setOrders([]);
 				return;
 			}
-			setOrders(currentPage === 1
-				? response.data.data
-				: [...orders, ...response.data.data],
+			setOrders(
+				currentPage === 1
+					? response.data.data
+					: [...orders, ...response.data.data],
 			);
 			setTotal(response.data.total);
 		},
@@ -76,6 +76,10 @@ export const useOrders = () => {
 		await mutateAsync({ params: filters, currentPage: 1 });
 		setRefreshing(false);
 	};
+
+	useEffect(() => {
+		mutateAsync({ params: filters, currentPage: 1 });
+	}, []);
 
 	return {
 		loading: isPending,

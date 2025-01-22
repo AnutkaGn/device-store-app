@@ -5,6 +5,7 @@ import {
 	UpdateOrderDetailsPayload,
 	OrderResponce,
 } from "src/services/order";
+import { Messages } from "src/shared/constants";
 import { getErrorMessage, showToast, ToastType } from "src/shared/helpers";
 import { IServerError } from "src/shared/services/types";
 import { useOrderStore } from "src/store";
@@ -25,7 +26,7 @@ export const useUpdateOrderDetailQuantity = (orderId: string) => {
 	>({
 		mutationFn: updateOrderDetail,
 		onSuccess: (response) => {
-			showToast(ToastType.SUCCESS, "Quantity updated successfully.");
+			showToast(ToastType.SUCCESS, Messages.QUANTITY_UPDATED);
 			setTotalAmount(orderId, response.data.totalAmount);
 		},
 		onError: (error) => {
