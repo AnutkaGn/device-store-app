@@ -13,8 +13,8 @@ interface ProductCardProps {
 	title: string;
 	amount: number;
 	price: number;
-	onDelete: (id: string) => void;
-	navigationKey: NAVIGATION_KEYS.EDIT_CART_ITEM | NAVIGATION_KEYS.EDIT_ORDER;
+	onDelete?: (id: string) => void;
+	navigationKey?: NAVIGATION_KEYS.EDIT_CART_ITEM | NAVIGATION_KEYS.EDIT_ORDER;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
@@ -28,11 +28,16 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 	const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 
 	const handlePress = () => {
-		navigation.navigate(navigationKey, { id });
+		if (navigationKey) {
+			navigation.navigate(navigationKey, { id });
+		}
 	};
 
 	return (
-		<TouchableOpacity onPress={handlePress} style={styles.card}>
+		<TouchableOpacity
+			onPress={navigationKey ? handlePress : undefined}
+			style={styles.card}
+		>
 			<View style={styles.card_content}>
 				<Text style={styles.text}>{title}</Text>
 				<View style={styles.container_price_amount}>
@@ -46,9 +51,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 					</View>
 				</View>
 			</View>
-			<TouchableOpacity onPress={() => onDelete(id)} style={styles.icon}>
-				<TrashBinIcon />
-			</TouchableOpacity>
+			{onDelete && (
+				<TouchableOpacity onPress={() => onDelete(id)} style={styles.icon}>
+					<TrashBinIcon />
+				</TouchableOpacity>
+			)}
 		</TouchableOpacity>
 	);
 };

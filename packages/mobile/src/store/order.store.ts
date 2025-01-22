@@ -12,6 +12,7 @@ interface OrderStore {
 	updateOrderDetailQuantity: (id: string, quantity: number) => void;
 	getTotalAmount: (id: string) => number | undefined;
 	updateProductStock: (productId: string, quantityChange: number) => void;
+	getPaymentStatus: (id: string) => string | undefined;
 }
 
 export const useOrderStore = create<OrderStore>((set, get) => ({
@@ -64,5 +65,9 @@ export const useOrderStore = create<OrderStore>((set, get) => ({
 
 			return { orderDetails: updatedOrderDetails };
 		});
+	},
+	getPaymentStatus: (id) => {
+		const order = get().orders.find((order) => order.id === id);
+		return order ? order.paymentStatus : undefined;
 	},
 }));

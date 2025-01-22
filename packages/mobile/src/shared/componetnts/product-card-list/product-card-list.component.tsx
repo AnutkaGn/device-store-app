@@ -13,8 +13,8 @@ interface ProductCardItem {
 
 interface ProductCardListProps {
 	products: ProductCardItem[];
-	onDeleteProduct: (id: string) => void;
-	navigationKey: NAVIGATION_KEYS.EDIT_CART_ITEM | NAVIGATION_KEYS.EDIT_ORDER;
+	onDeleteProduct?: (id: string) => void;
+	navigationKey?: NAVIGATION_KEYS.EDIT_CART_ITEM | NAVIGATION_KEYS.EDIT_ORDER;
 }
 
 export const ProductCardList: React.FC<ProductCardListProps> = ({
@@ -28,7 +28,7 @@ export const ProductCardList: React.FC<ProductCardListProps> = ({
 			title={item.title}
 			amount={item.amount}
 			price={item.price}
-			onDelete={() => onDeleteProduct(item.id)}
+			onDelete={onDeleteProduct}
 			navigationKey={navigationKey}
 		/>
 	);

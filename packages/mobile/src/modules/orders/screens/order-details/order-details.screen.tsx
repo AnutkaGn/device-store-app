@@ -13,13 +13,16 @@ import { useOrderStore } from "src/store/order.store";
 import { RouteProp, useRoute } from "@react-navigation/native";
 import { PayIcon } from "assets/icons/pay";
 import { styles } from "./order-details.styles";
+import { PAYMENT_STATUS } from "src/shared/enum/payment-status.enum";
 
 export const OrderDetailsScreen: React.FC = ({}) => {
 	const {
 		params: { id },
 	} = useRoute<RouteProp<RootStackParamList, NAVIGATION_KEYS.ORDERS_DETAILS>>();
 	const { loading, handleDelete } = useOrderDetails(id);
-	const { orderDetails, getTotalAmount } = useOrderStore();
+	const { orderDetails, getTotalAmount, getPaymentStatus } = useOrderStore();
+
+	const isPaymentSuccessful = getPaymentStatus(id) === PAYMENT_STATUS.SUCCESS;
 
 	if (loading || !orderDetails) {
 		return <Loader />;
@@ -39,18 +42,21 @@ export const OrderDetailsScreen: React.FC = ({}) => {
 					amount: detail.quantity,
 					price: detail.priceAtPurchase,
 				}))}
-				onDeleteProduct={handleDelete}
-				navigationKey={NAVIGATION_KEYS.EDIT_ORDER}
+				onDeleteProduct={!isPaymentSuccessful ? handleDelete : undefined}
+				navigationKey={!isPaymentSuccessful ? NAVIGATION_KEYS.EDIT_ORDER : undefined}
 			/>
-			<Button
-				title={
-					<>
-						<PayIcon />
-						<Text style={styles.botton_title}>Pay</Text>
-					</>
-				}
-				onPress={() => {}}
-			/>
+
+			{!isPaymentSuccessful && (
+				<Button
+					title={
+						<>
+							<PayIcon />
+							<Text style={styles.botton_title}>Pay</Text>
+						</>
+					}
+					onPress={() => {}}
+				/>
+			)}
 		</Layout>
 	);
 };
