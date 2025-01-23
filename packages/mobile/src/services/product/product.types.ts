@@ -1,4 +1,4 @@
-import { SortOrder } from "src/modules/products/enum/sort-order.enum";
+import { SortOrder } from "src/shared/enum/sort-order.enum";
 
 export interface Product {
 	id: string;

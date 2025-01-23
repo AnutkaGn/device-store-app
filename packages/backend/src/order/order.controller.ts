@@ -34,7 +34,6 @@ export class OrderController {
 		return this.orderService.getById(id);
 	}
 
-	@Roles(UserRole.ADMIN)
 	@Post()
 	async create(
 		@Body() data: CreateOrderDto,

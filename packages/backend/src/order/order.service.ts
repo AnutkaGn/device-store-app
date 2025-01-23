@@ -48,7 +48,7 @@ export class OrderService {
 				createdAt: sortDirection,
 			},
 			skip,
-			take: limit,
+			take: Number(limit),
 		});
 
 		if (orders.length === 0) {

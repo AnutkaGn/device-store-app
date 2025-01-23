@@ -9,12 +9,10 @@ import { IServerError } from "src/shared/services/types";
 import { getErrorMessage, showToast, ToastType } from "src/shared/helpers";
 import { AxiosError } from "axios";
 import { useState } from "react";
-import { useAuthStore } from "src/store";
 
 const PAGE_LIMIT = 10;
 
 export const useProducts = () => {
-	const { setAccessToken } = useAuthStore();
 	const [page, setPage] = useState(1);
 	const [products, setProducts] = useState<ProductListItem[]>([]);
 	const [total, setTotal] = useState<number>(0);
