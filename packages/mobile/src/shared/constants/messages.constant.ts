@@ -19,4 +19,6 @@ export const Messages = {
 	ORDER_DELETE: "Order has been removed.",
 	ITEM_DELETE: "Item successfully removed.",
 	QUANTITY_UPDATED: "Quantity updated successfully.",
+	USER_UPDATED: "Profile info updated successfully.",
+	PASSWORD_CHANGE: "Password changed successfully.",
 };

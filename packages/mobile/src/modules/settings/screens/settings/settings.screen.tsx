@@ -1,28 +1,38 @@
+import { NavigationProp, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Text, TouchableOpacity } from "react-native";
-import { StyleSheet } from "react-native";
+import {
+	NAVIGATION_KEYS,
+	RootStackParamList,
+} from "src/modules/navigation/types";
 import { Layout } from "src/shared/componetnts";
 import { Header } from "src/shared/componetnts/header";
-import { COLORS, FONTS } from "src/shared/styles";
+import { styles } from "./settings.styles";
 import { useAuthStore } from "src/store";
 
 export const SettingsScreen = () => {
+	const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 	const { logout } = useAuthStore();
+
+	const navigateToPersonalInfo = () => {
+		navigation.navigate(NAVIGATION_KEYS.PERSONAL_INFO);
+	};
+	const navigateToChangePassword = () => {
+		navigation.navigate(NAVIGATION_KEYS.CHANGE_PASSWORD);
+	};
+
 	return (
 		<Layout>
 			<Header title="Settings" />
+			<TouchableOpacity onPress={navigateToPersonalInfo}>
+				<Text style={styles.text}>Personal info</Text>
+			</TouchableOpacity>
+			<TouchableOpacity onPress={navigateToChangePassword}>
+				<Text style={styles.text}>Change password</Text>
+			</TouchableOpacity>
 			<TouchableOpacity onPress={logout}>
 				<Text style={styles.logout_text}>Logout</Text>
 			</TouchableOpacity>
 		</Layout>
 	);
 };
-
-const styles = StyleSheet.create({
-	logout_text: {
-		color: COLORS.danger,
-		fontFamily: FONTS.POPPINS_REGULAR,
-		fontSize: 16,
-		marginBlockStart: 20,
-	},
-});

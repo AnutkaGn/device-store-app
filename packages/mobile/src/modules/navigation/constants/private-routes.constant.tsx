@@ -8,6 +8,8 @@ import { CartScreen } from "src/modules/cart/screens/cart";
 import { EditCartItemScreen } from "src/modules/cart/screens/edit-cart-item";
 import { OrderDetailsScreen } from "src/modules/orders/screens/order-details";
 import { EditOrderScreen } from "src/modules/orders/screens/edit-order";
+import { PersonalInfoScreen } from "src/modules/settings/screens/personal-info";
+import { ChangePasswordScreen } from "src/modules/settings/screens/change-settings";
 
 const PrivateStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -41,6 +43,16 @@ export const PRIVATE_SCREENS = (
 		<PrivateStack.Screen
 			name={NAVIGATION_KEYS.EDIT_ORDER}
 			component={EditOrderScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<PrivateStack.Screen
+			name={NAVIGATION_KEYS.PERSONAL_INFO}
+			component={PersonalInfoScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<PrivateStack.Screen
+			name={NAVIGATION_KEYS.CHANGE_PASSWORD}
+			component={ChangePasswordScreen}
 			options={SCREEN_OPTIONS}
 		/>
 	</>
