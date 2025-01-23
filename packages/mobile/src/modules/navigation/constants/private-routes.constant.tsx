@@ -6,8 +6,9 @@ import { BottomTab } from "../components/bottom-tab";
 import { ProductInformationScreen } from "src/modules/products/screens/product-information";
 import { CartScreen } from "src/modules/cart/screens/cart";
 import { EditCartItemScreen } from "src/modules/cart/screens/edit-cart-item";
-import { OrderDetailsScreen } from "src/modules/orders/screens/order-details";
 import { EditOrderScreen } from "src/modules/orders/screens/edit-order";
+import { PaymentSuccessfullyScreen } from "src/modules/payment/screens/payment-successfully";
+import { OrderDetailsScreen } from "src/modules/orders/screens/order-details";
 
 const PrivateStack = createNativeStackNavigator<RootStackParamList>();
 
@@ -41,6 +42,11 @@ export const PRIVATE_SCREENS = (
 		<PrivateStack.Screen
 			name={NAVIGATION_KEYS.EDIT_ORDER}
 			component={EditOrderScreen}
+			options={SCREEN_OPTIONS}
+		/>
+		<PrivateStack.Screen
+			name={NAVIGATION_KEYS.PAYMENT_SUCCESSFULLY}
+			component={PaymentSuccessfullyScreen}
 			options={SCREEN_OPTIONS}
 		/>
 	</>
