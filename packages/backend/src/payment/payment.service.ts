@@ -33,7 +33,7 @@ export class PaymentService {
 		const payment = await this.findByOrderId(orderId);
 
 		if (payment.data) {
-			const updatedPayment = await this.updatePayment({
+			const updatedPayment = await this.update({
 				paymentId: payment.data.id,
 				totalAmount,
 				orderId,
@@ -70,7 +70,7 @@ export class PaymentService {
 		}
 	}
 
-	async updatePayment(
+	async update(
 		data: UpdatePaymentPayload,
 	): Promise<ResponseDto<Payment>> {
 		const { paymentId, orderId, totalAmount } = data;
