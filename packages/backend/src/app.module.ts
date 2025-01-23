@@ -14,6 +14,7 @@ import { JwtService } from "@nestjs/jwt";
 import { RolesGuard } from "./common/guards/roles.guard";
 import { OrderModule } from "./order/order.module";
 import { OrderDetailsModule } from "./order-deteils/order-details.module";
+import { PaymentModule } from "./payment/payment.module";
 
 @Module({
 	imports: [
@@ -27,6 +28,7 @@ import { OrderDetailsModule } from "./order-deteils/order-details.module";
 		ProductModule,
 		OrderModule,
 		OrderDetailsModule,
+		PaymentModule,
 	],
 	controllers: [],
 	providers: [
