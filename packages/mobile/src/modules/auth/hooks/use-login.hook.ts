@@ -1,10 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { AxiosError } from "axios";
 import { authService } from "src/services/auth";
 import { LoginPayload, AuthResponse } from "src/services/auth";
-import { loginFormSchema, LoginFormValues } from "../validation";
+import { LoginFormValues } from "../validation";
 import { HttpStatusCode, IServerError } from "src/shared/services/types";
 import { getErrorMessage, showToast, ToastType } from "src/shared/helpers";
 import { useAuthStore } from "src/store";
@@ -21,7 +20,6 @@ export const useLogin = () => {
 	const { control, handleSubmit, setError } = useForm<LoginFormValues>({
 		mode: "all",
 		reValidateMode: "onChange",
-		resolver: yupResolver(loginFormSchema),
 	});
 
 	const login = async (values: LoginPayload): Promise<AuthResponse> => {

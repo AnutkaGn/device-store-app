@@ -15,4 +15,8 @@ export const Messages = {
 	PASSWORDS_DO_NOT_MATCH: "Passwords do not match.",
 	INVALID_PHONE: "Invalid phone number.",
 	ADD_CART_SUCCESS: "Product added to cart!",
+	ORDER_CREATED: "Order created successfully!",
+	ORDER_DELETE: "Order has been removed.",
+	ITEM_DELETE: "Item successfully removed.",
+	QUANTITY_UPDATED: "Quantity updated successfully.",
 };

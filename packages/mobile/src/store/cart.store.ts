@@ -9,6 +9,7 @@ interface CartStore {
 	getItemAmount: (id: string) => number;
 	getTotalItems: () => number;
 	totalPrice: number;
+	clearCart: () => void;
 }
 
 export const useCartStore = create<CartStore>((set, get) => ({
@@ -78,4 +79,5 @@ export const useCartStore = create<CartStore>((set, get) => ({
 	getTotalItems: () => {
 		return get().cart.length;
 	},
+	clearCart: () => set({ cart: [], totalPrice: 0 }),
 }));

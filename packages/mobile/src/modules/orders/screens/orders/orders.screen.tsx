@@ -1,24 +1,27 @@
 import React from "react";
-import { View, Text } from "react-native";
-import { StyleSheet } from "react-native";
-import { FONTS } from "src/shared/styles";
+import { Layout } from "src/shared/componetnts";
+import { Header } from "src/shared/componetnts/header";
+import { OrderList } from "../../components/orders-list";
+import { FilterPanel } from "../../components/filter-panel";
+import { useOrders } from "../../hooks/use-orders.hook";
+import { useOrderStore } from "src/store";
 
 export const OrdersScreen = () => {
+	const { loading, loadMoreOrders, updateFilters, refreshing, onRefresh } =
+		useOrders();
+	const { orders } = useOrderStore();
+
 	return (
-		<View style={styles.container}>
-			<Text style={styles.text}>Orders</Text>
-		</View>
+		<Layout isScrollable={false}>
+			<Header title="Orders" />
+			<FilterPanel onFilterChange={updateFilters} />
+			<OrderList
+				orders={orders}
+				loading={loading}
+				onLoadMore={loadMoreOrders}
+				onRefresh={onRefresh}
+				refreshing={refreshing}
+			/>
+		</Layout>
 	);
 };
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: "center",
-		alignItems: "center",
-	},
-	text: {
-		fontFamily: FONTS.POPPINS_SEMIBOLD,
-		fontSize: 24,
-	},
-});

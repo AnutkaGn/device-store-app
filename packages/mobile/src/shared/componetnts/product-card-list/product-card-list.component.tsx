@@ -2,6 +2,7 @@ import React from "react";
 import { FlatList, Text } from "react-native";
 import { ProductCard } from "../product-card";
 import { styles } from "./product-card.styles";
+import { NAVIGATION_KEYS } from "src/modules/navigation/types";
 
 interface ProductCardItem {
 	id: string;
@@ -12,12 +13,14 @@ interface ProductCardItem {
 
 interface ProductCardListProps {
 	products: ProductCardItem[];
-	onDeleteProduct: (id: string) => void;
+	onDeleteProduct?: (id: string) => void;
+	navigationKey?: NAVIGATION_KEYS.EDIT_CART_ITEM | NAVIGATION_KEYS.EDIT_ORDER;
 }
 
 export const ProductCardList: React.FC<ProductCardListProps> = ({
 	products,
 	onDeleteProduct,
+	navigationKey,
 }) => {
 	const renderItem = ({ item }: { item: ProductCardItem }) => (
 		<ProductCard
@@ -25,13 +28,14 @@ export const ProductCardList: React.FC<ProductCardListProps> = ({
 			title={item.title}
 			amount={item.amount}
 			price={item.price}
-			onDelete={() => onDeleteProduct(item.id)}
+			onDelete={onDeleteProduct}
+			navigationKey={navigationKey}
 		/>
 	);
 
 	const renderEmptyList = () => (
-			<Text  style={styles.text}>Your list is empty.</Text>
-		);
+		<Text style={styles.text}>Your list is empty.</Text>
+	);
 
 	return (
 		<FlatList

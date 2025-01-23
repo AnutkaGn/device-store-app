@@ -4,7 +4,7 @@ import { Product } from "src/services/product";
 import { styles } from "./product-info.styles";
 
 interface ProductInfoProps {
-	product: Product;
+	product: Partial<Product>;
 }
 
 export const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {

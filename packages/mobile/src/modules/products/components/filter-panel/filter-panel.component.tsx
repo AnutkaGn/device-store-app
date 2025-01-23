@@ -4,7 +4,7 @@ import { CrossIcon } from "assets/icons/cross";
 import { RightArrowIcon } from "assets/icons/right-arrow";
 import useDebounceEffect from "src/shared/hooks/use-debounce-effect.hooks";
 import { COLORS } from "src/shared/styles";
-import { SORT_ORDER, SortOrder } from "../../enum/sort-order.enum";
+import { SORT_ORDER, SortOrder } from "src/shared/enum/sort-order.enum";
 import { styles } from "./filter-panel.styles";
 
 interface FilterPanelProps {

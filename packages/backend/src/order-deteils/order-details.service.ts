@@ -56,13 +56,17 @@ export class OrderDetailsService {
 			},
 			select: {
 				id: true,
+				orderId: true,
 				productId: true,
 				quantity: true,
 				priceAtPurchase: true,
 				product: {
 					select: {
 						name: true,
+						description: true,
 						price: true,
+						stock: true,
+						category: true,
 					},
 				},
 			},
