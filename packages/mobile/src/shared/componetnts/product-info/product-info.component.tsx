@@ -24,7 +24,7 @@ export const ProductInfo: React.FC<ProductInfoProps> = ({ product }) => {
 			</View>
 			<View style={styles.item_container}>
 				<Text style={styles.bold_text}>Price: </Text>
-				<Text style={styles.text}>{product.price}</Text>
+				<Text style={styles.text}>${product.price}</Text>
 			</View>
 			<View style={styles.item_container}>
 				<Text style={styles.bold_text}>Category: </Text>

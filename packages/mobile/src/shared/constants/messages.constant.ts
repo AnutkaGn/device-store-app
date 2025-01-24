@@ -21,4 +21,5 @@ export const Messages = {
 	QUANTITY_UPDATED: "Quantity updated successfully.",
 	USER_UPDATED: "Profile info updated successfully.",
 	PASSWORD_CHANGE: "Password changed successfully.",
+	PAYMENT_FAILD: "Payment faild. Please try again.",
 };
