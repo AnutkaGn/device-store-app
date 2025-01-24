@@ -60,7 +60,7 @@ export const usePersonalInfo = () => {
 	>({
 		mutationFn: deleteUser,
 		onSuccess: () => {
-			logout()
+			logout();
 		},
 		onError: (error: AxiosError<IServerError>) => {
 			const errorMessage = getErrorMessage(error.response?.data?.message);

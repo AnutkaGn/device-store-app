@@ -8,7 +8,7 @@ import { CartScreen } from "src/modules/cart/screens/cart";
 import { EditCartItemScreen } from "src/modules/cart/screens/edit-cart-item";
 import { EditOrderScreen } from "src/modules/orders/screens/edit-order";
 import { PersonalInfoScreen } from "src/modules/settings/screens/personal-info";
-import { ChangePasswordScreen } from "src/modules/settings/screens/change-settings";
+import { ChangePasswordScreen } from "src/modules/settings/screens/change-password";
 import { PaymentSuccessfullyScreen } from "src/modules/payment/screens/payment-successfully";
 import { OrderDetailsScreen } from "src/modules/orders/screens/order-details";
 

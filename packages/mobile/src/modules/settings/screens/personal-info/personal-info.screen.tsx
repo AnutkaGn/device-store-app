@@ -9,13 +9,8 @@ import { usePersonalInfo } from "../../hooks/use-personal-info.hook";
 
 export const PersonalInfoScreen = () => {
 	const [isModalVisible, setModalVisible] = useState<boolean>(false);
-	const {
-		control,
-		handleSubmit,
-		handleDeleteUser,
-		isUpdating,
-		isValid,
-	} = usePersonalInfo();
+	const { control, handleSubmit, handleDeleteUser, isUpdating, isValid } =
+		usePersonalInfo();
 
 	return (
 		<Layout>
