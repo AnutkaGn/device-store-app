@@ -18,6 +18,9 @@ export const Messages = {
 	INVALID_OR_EXPIRED_TOKEN: "Invalid or expired token.",
 	USER_GET_SUCCESSFULLY: "User get successfully.",
 	USER_UPDATED_SUCCESSFULLY: "User updated successfully.",
+	USER_DELETED: "User deleted successfully.",
+	PASSWORD_UPDATED: "Password updated successfully.",
+	INCORECT_PASSWORD: "Incorrect old password.",
 
 	// roles messages
 	USER_ROLES_NOT_FOUND: "User roles not found.",
