@@ -1,1 +1,1 @@
-export { PersonalInfoForm } from "./personal-info-from.component"
+export { PersonalInfoForm } from "./personal-info-from.component";

@@ -11,7 +11,7 @@ import { styles } from "./faq-item.styles";
 interface FAQItemProps {
 	question: string;
 	answer: string;
-};
+}
 
 export const FAQItem = ({ question, answer }: FAQItemProps) => {
 	const [isOpen, setIsOpen] = useState(false);

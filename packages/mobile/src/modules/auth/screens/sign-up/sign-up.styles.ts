@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
 		fontFamily: FONTS.POPPINS_BOLD,
 		fontSize: 16,
 		textAlign: "center",
-		marginBottom: 24,
-		marginBlockStart: 30,
+		marginBottom: 16,
+		marginBlockStart: 16,
 	},
 });

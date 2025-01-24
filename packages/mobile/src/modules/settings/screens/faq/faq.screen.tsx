@@ -5,7 +5,6 @@ import { FAQItem } from "../../components/faq-item";
 import { faqData } from "../../constants/faq-data.constant";
 
 export const FaqScreen: React.FC = () => {
-
 	return (
 		<Layout>
 			<Header title="FAQ" showBackButton />

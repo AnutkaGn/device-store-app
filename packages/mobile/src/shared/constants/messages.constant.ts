@@ -8,6 +8,7 @@ export const Messages = {
 	REGISTRATION_FAILED: "Registration failed.",
 	NOT_VERIFIED: "Your email is not verified.",
 	LOGIN_FAILED: "Login failed. Please check your credentials.",
+	INVALID_CREDENTIALS: "Invalid credentials.",
 	VERIFICATION_SUCCESSFUL: "Verification successful",
 	VERIFICATION_FAILED: "Verification failed.",
 	ERROR_NETWORK: "Network error. Please try again.",

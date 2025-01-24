@@ -1,1 +1,1 @@
-export { ChangePasswordForm } from "./change-password-form.component"
+export { ChangePasswordForm } from "./change-password-form.component";
