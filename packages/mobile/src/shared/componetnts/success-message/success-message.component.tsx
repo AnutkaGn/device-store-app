@@ -6,7 +6,7 @@ import { CheckCircleIcon } from "assets/icons/checkmark-circle";
 
 type SuccessMessageProps = {
 	message: string;
-	buttonText: string;
+	buttonText: React.ReactNode | string;
 	onButtonPress: () => void;
 };
 

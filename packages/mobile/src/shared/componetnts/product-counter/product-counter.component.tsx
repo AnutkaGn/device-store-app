@@ -30,9 +30,9 @@ export const ProductCounter: React.FC<ProductCounterProps> = ({
 			<Text style={styles.title}>Amount:</Text>
 			<View style={styles.counter_container}>
 				<TouchableOpacity
-					style={[styles.button, count === 1 && styles.disabled_button]}
+					style={[styles.button, count <= 1  && styles.disabled_button]}
 					onPress={decrement}
-					disabled={count === 1}
+					disabled={count <= 1}
 				>
 					<Text style={[styles.button_text]}>-</Text>
 				</TouchableOpacity>
@@ -42,9 +42,9 @@ export const ProductCounter: React.FC<ProductCounterProps> = ({
 				</View>
 
 				<TouchableOpacity
-					style={[styles.button, count === maxCount && styles.disabled_button]}
+					style={[styles.button, count >= maxCount && styles.disabled_button]}
 					onPress={increment}
-					disabled={count === maxCount}
+					disabled={count >= maxCount}
 				>
 					<Text style={[styles.button_text]}>+</Text>
 				</TouchableOpacity>
