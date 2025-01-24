@@ -3,6 +3,7 @@ import {
 	UserResponse,
 	userService,
 	UpdatePersonalInfoPayload,
+	DeleteUserResponce,
 } from "src/services/user";
 import { IServerError } from "src/shared/services/types";
 import { AxiosError } from "axios";
@@ -11,8 +12,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { PersonalInfoFormValues, personalInfoFormSchema } from "../validation";
 import { getErrorMessage, showToast, ToastType } from "src/shared/helpers";
 import { Messages } from "src/shared/constants";
+import { useFetchUser } from "./use-fetch-user.hook";
+import { useAuthStore } from "src/store";
 
-export const useUpdatePersonalInfo = () => {
+export const usePersonalInfo = () => {
+	const { fetchUser } = useFetchUser();
+	const logout = useAuthStore((store) => store.logout);
 	const {
 		control,
 		handleSubmit,
@@ -23,13 +28,17 @@ export const useUpdatePersonalInfo = () => {
 		resolver: yupResolver(personalInfoFormSchema),
 	});
 
+	const deleteUser = async (): Promise<DeleteUserResponce> => {
+		return await userService.delete();
+	};
+
 	const updatePersonalInfo = async (
 		values: UpdatePersonalInfoPayload,
 	): Promise<UserResponse> => {
 		return await userService.updatePersonalInfo(values);
 	};
 
-	const { mutateAsync, isPending } = useMutation<
+	const { mutateAsync: updateUser, isPending: isUpdating } = useMutation<
 		UserResponse,
 		AxiosError<IServerError>,
 		UpdatePersonalInfoPayload
@@ -37,6 +46,21 @@ export const useUpdatePersonalInfo = () => {
 		mutationFn: updatePersonalInfo,
 		onSuccess: () => {
 			showToast(ToastType.SUCCESS, Messages.USER_UPDATED);
+			fetchUser();
+		},
+		onError: (error: AxiosError<IServerError>) => {
+			const errorMessage = getErrorMessage(error.response?.data?.message);
+			showToast(ToastType.ERROR, errorMessage);
+		},
+	});
+
+	const { mutateAsync: handleDeleteUser } = useMutation<
+		DeleteUserResponce,
+		AxiosError<IServerError>
+	>({
+		mutationFn: deleteUser,
+		onSuccess: () => {
+			logout()
 		},
 		onError: (error: AxiosError<IServerError>) => {
 			const errorMessage = getErrorMessage(error.response?.data?.message);
@@ -45,13 +69,14 @@ export const useUpdatePersonalInfo = () => {
 	});
 
 	const onSubmit = async (data: PersonalInfoFormValues) => {
-		await mutateAsync(data);
+		await updateUser(data);
 	};
 
 	return {
 		control,
 		handleSubmit: handleSubmit(onSubmit),
-		isPending,
+		isUpdating,
 		isValid,
+		handleDeleteUser,
 	};
 };

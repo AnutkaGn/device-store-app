@@ -49,4 +49,8 @@ export const styles = StyleSheet.create({
 		right: 15,
 		top: 45,
 	},
+	disabled: {
+		backgroundColor: COLORS.background_light_grey,
+		color: COLORS.text_secondary,
+	},
 });

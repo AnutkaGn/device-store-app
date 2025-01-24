@@ -5,28 +5,36 @@ import { ConfirmationModal } from "../../components/confirmation-modal";
 import { Text, TouchableOpacity } from "react-native";
 import { styles } from "./personal-info.styles";
 import { PersonalInfoForm } from "../../components/personal-info-from/personal-info-from.component";
+import { usePersonalInfo } from "../../hooks/use-personal-info.hook";
 
 export const PersonalInfoScreen = () => {
 	const [isModalVisible, setModalVisible] = useState<boolean>(false);
+	const {
+		control,
+		handleSubmit,
+		handleDeleteUser,
+		isUpdating,
+		isValid,
+	} = usePersonalInfo();
 
-	const handleDeleteAccount = () => {
-		console.log("Deleted");
-		setModalVisible(false);
-	};
 	return (
 		<Layout>
 			<Header title="Personal info" showBackButton />
-			<PersonalInfoForm />
+			<PersonalInfoForm control={control} />
 			<TouchableOpacity
 				style={styles.text_container}
 				onPress={() => setModalVisible(true)}
 			>
 				<Text style={styles.text}>Delete Account</Text>
 			</TouchableOpacity>
-			<Button title="Save" onPress={() => {}} />
+			<Button
+				title="Save"
+				onPress={() => handleSubmit()}
+				disabled={isUpdating || !isValid}
+			/>
 			<ConfirmationModal
 				visible={isModalVisible}
-				onConfirm={handleDeleteAccount}
+				onConfirm={handleDeleteUser}
 				onCancel={() => setModalVisible(false)}
 			/>
 		</Layout>

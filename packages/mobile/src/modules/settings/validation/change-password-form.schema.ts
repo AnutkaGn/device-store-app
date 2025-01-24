@@ -2,10 +2,7 @@ import { Messages, Regex } from "src/shared/constants";
 import * as yup from "yup";
 
 export const changePasswordSchema = yup.object().shape({
-	currentPassword: yup
-		.string()
-		.matches(Regex.PASSWORD, Messages.PASSWORD_RULES)
-		.required(Messages.REQUIRED),
+	currentPassword: yup.string().required(Messages.REQUIRED),
 	newPassword: yup
 		.string()
 		.matches(Regex.PASSWORD, Messages.PASSWORD_RULES)

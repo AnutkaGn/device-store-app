@@ -42,7 +42,10 @@ export const useChangePassword = () => {
 	});
 
 	const onSubmit = async (data: ChangePasswordFormValues) => {
-		await mutateAsync({ password: data.newPassword });
+		await mutateAsync({
+			oldPassword: data.currentPassword,
+			newPassword: data.newPassword,
+		});
 	};
 
 	return {

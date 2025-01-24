@@ -8,7 +8,6 @@ export const ChangePasswordScreen = () => {
 		<Layout>
 			<Header title="Change password" showBackButton />
 			<ChangePasswordForm />
-			<Button title="Save" onPress={() => {}} />
 		</Layout>
 	);
 };

@@ -1,11 +1,11 @@
 import React from "react";
-import { Input } from "src/shared/componetnts";
+import { Button, Input } from "src/shared/componetnts";
 import { useChangePassword } from "../../hooks/use-change-password.hook";
 import { View } from "react-native";
 import { styles } from "./change-password-form.styles";
 
 export const ChangePasswordForm = () => {
-	const { control, handleSubmit, isPending, isValid } = useChangePassword();
+	const { control, handleSubmit, isValid } = useChangePassword();
 
 	return (
 		<View style={styles.container}>
@@ -29,6 +29,7 @@ export const ChangePasswordForm = () => {
 				label="Confirm Password"
 				secureTextEntry={true}
 			/>
+			<Button title="Save" onPress={() => handleSubmit()} disabled={!isValid} />
 		</View>
 	);
 };

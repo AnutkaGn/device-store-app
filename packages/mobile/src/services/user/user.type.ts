@@ -13,7 +13,8 @@ export interface UpdatePersonalInfoPayload {
 }
 
 export interface UpdatePasswordPayload {
-	password: string;
+	oldPassword: string;
+	newPassword: string;
 }
 
 export interface UserResponse {

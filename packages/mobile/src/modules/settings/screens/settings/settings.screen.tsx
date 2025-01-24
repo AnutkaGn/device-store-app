@@ -9,7 +9,7 @@ import { Layout } from "src/shared/componetnts";
 import { Header } from "src/shared/componetnts/header";
 import { styles } from "./settings.styles";
 import { useAuthStore } from "src/store";
-import { useFetchUser } from "../../hooks/use-fatch-user.hook";
+import { useFetchUser } from "../../hooks/use-fetch-user.hook";
 
 export const SettingsScreen = () => {
 	const navigation = useNavigation<NavigationProp<RootStackParamList>>();
