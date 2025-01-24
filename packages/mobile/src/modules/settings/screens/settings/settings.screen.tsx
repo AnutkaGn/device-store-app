@@ -26,6 +26,9 @@ export const SettingsScreen = () => {
 	const navigateToChangePassword = () => {
 		navigation.navigate(NAVIGATION_KEYS.CHANGE_PASSWORD);
 	};
+	const navigateToFAQ = () => {
+		navigation.navigate(NAVIGATION_KEYS.FAQ);
+	};
 
 	return (
 		<Layout>
@@ -35,6 +38,9 @@ export const SettingsScreen = () => {
 			</TouchableOpacity>
 			<TouchableOpacity onPress={navigateToChangePassword}>
 				<Text style={styles.text}>Change password</Text>
+			</TouchableOpacity>
+			<TouchableOpacity onPress={navigateToFAQ}>
+				<Text style={styles.text}>FAQ</Text>
 			</TouchableOpacity>
 			<TouchableOpacity onPress={logout}>
 				<Text style={styles.logout_text}>Logout</Text>

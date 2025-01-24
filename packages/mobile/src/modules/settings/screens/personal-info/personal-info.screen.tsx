@@ -4,7 +4,7 @@ import { Header } from "src/shared/componetnts/header";
 import { ConfirmationModal } from "../../components/confirmation-modal";
 import { Text, TouchableOpacity } from "react-native";
 import { styles } from "./personal-info.styles";
-import { PersonalInfoForm } from "../../components/personal-info-from/personal-info-from.component";
+import { PersonalInfoForm } from "../../components/personal-info-from";
 import { usePersonalInfo } from "../../hooks/use-personal-info.hook";
 
 export const PersonalInfoScreen = () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Layout } from "src/shared/componetnts";
 import { Header } from "src/shared/componetnts/header";
-import { ChangePasswordForm } from "../../components/change-password-form/change-password-form.component";
+import { ChangePasswordForm } from "../../components/change-password-form";
 import { useChangePassword } from "../../hooks/use-change-password.hook";
 
 export const ChangePasswordScreen = () => {
