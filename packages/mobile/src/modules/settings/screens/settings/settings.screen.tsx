@@ -1,5 +1,5 @@
 import { NavigationProp, useNavigation } from "@react-navigation/native";
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, TouchableOpacity } from "react-native";
 import {
 	NAVIGATION_KEYS,
@@ -9,10 +9,16 @@ import { Layout } from "src/shared/componetnts";
 import { Header } from "src/shared/componetnts/header";
 import { styles } from "./settings.styles";
 import { useAuthStore } from "src/store";
+import { useFetchUser } from "../../hooks/use-fatch-user.hook";
 
 export const SettingsScreen = () => {
 	const navigation = useNavigation<NavigationProp<RootStackParamList>>();
 	const { logout } = useAuthStore();
+	const { fetchUser } = useFetchUser();
+
+	useEffect(() => {
+		fetchUser();
+	}, []);
 
 	const navigateToPersonalInfo = () => {
 		navigation.navigate(NAVIGATION_KEYS.PERSONAL_INFO);
