@@ -1,4 +1,5 @@
 import { Order, OrderDetailInfo } from "src/services/order";
+import { PaymentStatus } from "src/shared/enum/payment-status.enum";
 import { create } from "zustand";
 
 interface OrderStore {
@@ -13,6 +14,7 @@ interface OrderStore {
 	getTotalAmount: (id: string) => number | undefined;
 	updateProductStock: (productId: string, quantityChange: number) => void;
 	getPaymentStatus: (id: string) => string | undefined;
+	setPaymentStatus: (id: string, status: PaymentStatus) => void;
 }
 
 export const useOrderStore = create<OrderStore>((set, get) => ({
@@ -69,5 +71,12 @@ export const useOrderStore = create<OrderStore>((set, get) => ({
 	getPaymentStatus: (id) => {
 		const order = get().orders.find((order) => order.id === id);
 		return order ? order.paymentStatus : undefined;
+	},
+	setPaymentStatus: (id, status) => {
+		set((state) => ({
+			orders: state.orders.map((order) =>
+				order.id === id ? { ...order, paymentStatus: status } : order,
+			),
+		}));
 	},
 }));

@@ -41,4 +41,9 @@ export const Messages = {
 	ORDER_DELETED: "Order deleted successfully.",
 	ORDER_DETAILS_NOT_FOUND: "Order details not found.",
 	ORDER_CREATION_FAILED: "Failed to create order detail.",
+
+	// Payment messages
+	PAYMENT_RETRIEVED: "Payment retrieved successfully.",
+	PAYMENT_CREATED: "Payment has been successfully created.",
+	PAYMENT_UPDATED: "Payment has been successfully updated.",
 };

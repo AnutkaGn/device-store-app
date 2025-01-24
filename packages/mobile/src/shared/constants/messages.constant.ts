@@ -19,4 +19,5 @@ export const Messages = {
 	ORDER_DELETE: "Order has been removed.",
 	ITEM_DELETE: "Item successfully removed.",
 	QUANTITY_UPDATED: "Quantity updated successfully.",
+	PAYMENT_FAILD: "Payment faild. Please try again.",
 };
