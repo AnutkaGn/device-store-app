@@ -59,8 +59,12 @@ export const ProductInformationScreen = () => {
 						onChange={setCount}
 						maxCount={product.stock}
 					/>
-					
-					<Button title="Add to Cart" onPress={handleSubmit} disabled={product.stock === 0}/>
+
+					<Button
+						title="Add to Cart"
+						onPress={handleSubmit}
+						disabled={product.stock === 0}
+					/>
 				</>
 			)}
 		</Layout>

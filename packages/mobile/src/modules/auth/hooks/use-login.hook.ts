@@ -50,10 +50,13 @@ export const useLogin = () => {
 
 			showToast(ToastType.ERROR, Messages.LOGIN_FAILED, errorMessage);
 
-			if (error.response?.data?.message) {
+			if (
+				error.response?.data?.statusCode === 401 ||
+				error.response?.data?.statusCode === 404
+			) {
 				setError("password", {
 					type: "manual",
-					message: errorMessage,
+					message: Messages.INVALID_CREDENTIALS,
 				});
 			}
 		},

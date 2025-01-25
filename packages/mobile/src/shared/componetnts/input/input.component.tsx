@@ -19,7 +19,6 @@ import {
 
 import { styles } from "./input.styles";
 import { InputError } from "../input-error";
-import StrikedEye from "assets/images/icons/striked-eye.svg";
 
 import { EyeIcon } from "assets/icons/eye";
 import { StrikedEyeIcon } from "assets/icons/striked-eye";
@@ -42,6 +41,7 @@ type InputProps<
 	extraInputContainerStyles?: StyleProp<ViewStyle>;
 	extraErrorStyles?: StyleProp<TextStyle>;
 	secureTextEntry?: boolean;
+	disabled?: boolean;
 };
 
 export function Input<
@@ -57,6 +57,7 @@ export function Input<
 	extraInputContainerStyles,
 	extraErrorStyles = {},
 	secureTextEntry = false,
+	disabled = false,
 }: InputProps<T, N>) {
 	const [isFocused, setIsFocused] = React.useState(false);
 	const [showPassword, setShowPassword] = React.useState(!secureTextEntry);
@@ -101,11 +102,13 @@ export function Input<
 					value && !error && styles.correct,
 					isFocused && styles.focused,
 					error && styles.wrong,
+					disabled && styles.disabled,
 				]}
 				autoCapitalize="none"
 				ref={inputRef}
 				secureTextEntry={!showPassword}
 				placeholder={placeholder}
+				editable={!disabled}
 			/>
 			{secureTextEntry && (
 				<TouchableOpacity

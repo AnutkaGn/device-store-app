@@ -8,6 +8,7 @@ export const Messages = {
 	REGISTRATION_FAILED: "Registration failed.",
 	NOT_VERIFIED: "Your email is not verified.",
 	LOGIN_FAILED: "Login failed. Please check your credentials.",
+	INVALID_CREDENTIALS: "Invalid credentials.",
 	VERIFICATION_SUCCESSFUL: "Verification successful",
 	VERIFICATION_FAILED: "Verification failed.",
 	ERROR_NETWORK: "Network error. Please try again.",
@@ -19,5 +20,7 @@ export const Messages = {
 	ORDER_DELETE: "Order has been removed.",
 	ITEM_DELETE: "Item successfully removed.",
 	QUANTITY_UPDATED: "Quantity updated successfully.",
+	USER_UPDATED: "Profile info updated successfully.",
+	PASSWORD_CHANGE: "Password changed successfully.",
 	PAYMENT_FAILD: "Payment faild. Please try again.",
 };
